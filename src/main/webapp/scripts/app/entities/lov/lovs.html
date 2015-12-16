@@ -1,6 +1,40 @@
 <div>
-    <h2>Lovs</h2>
+    <h2>Parametre Yönetimi</h2>
+
     <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                Bu ekran parametreleri yönetmek için kullanılır.<br/>
+                <ul>
+                    <li><strong>StrParam1: </strong> Çeşitli parametrelerde farklı anlamlara gelir. Ders ve sınavlar için <strong>ikon</strong> parametresidir.</li>
+                    <li><strong>StrParam2: </strong> Çeşitli parametrelerde farklı anlamlara gelir. Ders ve sınavlar için <strong>renk</strong> parametresidir.</li>
+                    <li><strong>IntParam1: </strong> Çeşitli parametrelerde farklı anlamlara gelir. Puan kazanma tipleri için kazanılacak puanı gösterir.</li>
+                    <li><strong>Status: </strong> Seçili ise bu değer aktif, yoksa pasif demektir. </li>
+                    <li><strong>Sequence: </strong> Bu kolon satırların sıralaması için kullanılır, hangisi daha küçükse o satır daha yukarudadır.</li>
+                </ul>
+            </div>
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>TYPE </strong> alını her bir parametre grubunu belirler. Lütfen bu alanı değiştirmeyiniz.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label for="field_user">Parametre Tipi</label>
+                    <select data-ng-change="loadLovList()"
+                            class="form-control" id="field_user"
+                            name="lov" ng-model="selectedLovType"
+                            data-ng-options="lov as lov.description for lov in lovTypes track by lov.id">
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="row">
             <div class="col-md-4">
@@ -15,15 +49,15 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th><span>ID</span></th>
-                    <th><span>Type</span></th>
-                    <th><span>Name</span></th>
-                    <th><span>StrParam1</span></th>
-                    <th><span>StrParam2</span></th>
-                    <th><span>IntParam1</span></th>
-                    <th><span>Description</span></th>
-                    <th><span>Status</span></th>
-                    <th><span>Sequence</span></th>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>StrParam1</th>
+                    <th>StrParam2</th>
+                    <th>IntParam1</th>
+                    <th>Desc</th>
+                    <th>Status</th>
+                    <th>Sequence</th>
                     <th></th>
                 </tr>
             </thead>
@@ -32,7 +66,10 @@
                     <td><a ui-sref="lov.detail({id:lov.id})">{{lov.id}}</a></td>
                     <td>{{lov.type}}</td>
                     <td>{{lov.name}}</td>
-                    <td>{{lov.strParam1}}</td>
+                    <td>
+                        <i class="fa {{lov.strParam1}}" data-ng-show="lov.strParam1"></i>
+                        &nbsp; {{lov.strParam1}}
+                    </td>
                     <td>{{lov.strParam2}}</td>
                     <td>{{lov.intParam1}}</td>
                     <td>{{lov.description}}</td>

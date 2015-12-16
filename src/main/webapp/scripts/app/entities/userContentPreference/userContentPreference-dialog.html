@@ -50,13 +50,13 @@
         </div>
         <div class="form-group">
             <label for="field_contentType">contentType</label>
-            <select class="form-control" id="field_contentType" name="contentType" ng-model="userContentPreference.contentType" ng-options="lov as lov.name for lov in lovs track by lov.id">
+            <select class="form-control" id="field_contentType" name="contentType" ng-model="userContentPreference.contentType" ng-options="lov as lov.name for lov in contentTypes track by lov.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
             <label for="field_contentPreference">contentPreference</label>
-            <select class="form-control" id="field_contentPreference" name="contentPreference" ng-model="userContentPreference.contentPreference" ng-options="lov as lov.name for lov in lovs track by lov.id">
+            <select class="form-control" id="field_contentPreference" name="contentPreference" ng-model="userContentPreference.contentPreference" ng-options="lov as lov.name for lov in contentPreferences track by lov.id">
                 <option value=""></option>
             </select>
         </div>

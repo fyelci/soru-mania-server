@@ -6,8 +6,9 @@
                 ng-click="clear()">&times;</button>
         <h4 class="modal-title" id="myQuestionLabel">Create or edit a Question</h4>
     </div>
-    <div class="modal-body">
+    <div class="modal-body form-horizontal no-margin-form-group">
         <jh-alert-error></jh-alert-error>
+
         <div class="form-group">
             <label for="id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
@@ -28,37 +29,24 @@
         <div class="form-group">
             <label class="control-label" for="field_commentCount">CommentCount</label>
             <input type="number" class="form-control" name="commentCount" id="field_commentCount"
-                    ng-model="question.commentCount"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_createDate">CreateDate</label>
-            <input type="datetime-local" class="form-control" name="createDate" id="field_createDate"
-                    ng-model="question.createDate"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_lastModifiedDate">LastModifiedDate</label>
-            <input type="datetime-local" class="form-control" name="lastModifiedDate" id="field_lastModifiedDate"
-                    ng-model="question.lastModifiedDate"
-                     />
+                   ng-model="question.commentCount" readonly/>
         </div>
 
         <div class="form-group">
-            <label for="field_category">category</label>
-            <select class="form-control" id="field_category" name="category" ng-model="question.category" ng-options="lov as lov.name for lov in lovs track by lov.id">
+            <label for="field_category">Sınav</label>
+            <select class="form-control" id="field_category" name="category" ng-model="question.category" ng-options="lov as lov.name for lov in categories track by lov.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
-            <label for="field_lesson">lesson</label>
-            <select class="form-control" id="field_lesson" name="lesson" ng-model="question.lesson" ng-options="lov as lov.name for lov in lovs track by lov.id">
+            <label for="field_lesson">Ders</label>
+            <select class="form-control" id="field_lesson" name="lesson" ng-model="question.lesson" ng-options="lov as lov.name for lov in lessons track by lov.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
             <label for="field_questionStatus">questionStatus</label>
-            <select class="form-control" id="field_questionStatus" name="questionStatus" ng-model="question.questionStatus" ng-options="lov as lov.name for lov in lovs track by lov.id">
+            <select class="form-control" id="field_questionStatus" name="questionStatus" ng-model="question.questionStatus" ng-options="lov as lov.name for lov in questionStatuses track by lov.id">
                 <option value=""></option>
             </select>
         </div>
@@ -68,6 +56,7 @@
                 <option value=""></option>
             </select>
         </div>
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">

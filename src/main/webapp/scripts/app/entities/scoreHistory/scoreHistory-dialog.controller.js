@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('soruManiaApp').controller('ScoreHistoryDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'ScoreHistory', 'User', 'Lov',
-        function($scope, $stateParams, $uibModalInstance, entity, ScoreHistory, User, Lov) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'ScoreHistory', 'User', 'LovType',
+        function($scope, $stateParams, $uibModalInstance, entity, ScoreHistory, User, LovType) {
 
         $scope.scoreHistory = entity;
         $scope.users = User.query();
-        $scope.lovs = Lov.query();
+        $scope.contentTypes = LovType.get({type:'CONTENT_TYPE'});
+        $scope.transactionTypes = LovType.get({type:'SCORE_TRANSACTION_TYPE'});
         $scope.load = function(id) {
             ScoreHistory.get({id : id}, function(result) {
                 $scope.scoreHistory = result;

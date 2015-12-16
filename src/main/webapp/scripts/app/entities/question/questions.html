@@ -16,15 +16,15 @@
             <thead>
                 <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="detail"><span>Detail</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="mediaUrl"><span>MediaUrl</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="commentCount"><span>CommentCount</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="createDate"><span>CreateDate</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lastModifiedDate"><span>LastModifiedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="category.name"><span>category</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lesson.name"><span>lesson</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="questionStatus.name"><span>questionStatus</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="user.login"><span>user</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="detail"><span>Detay</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="mediaUrl"><span>Resim</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="commentCount"><span>Cevap Sayısı</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="category.name"><span>Sınav</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lesson.name"><span>Ders</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="questionStatus.name"><span>Soru Durumu</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="user.login"><span>Kullanıcı</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createDate"><span>Oluşturma Tarihi</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span>Değişiklik Tarihi</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -32,10 +32,10 @@
                 <tr ng-repeat="question in questions track by question.id">
                     <td><a ui-sref="question.detail({id:question.id})">{{question.id}}</a></td>
                     <td>{{question.detail}}</td>
-                    <td>{{question.mediaUrl}}</td>
+                    <td>
+                        <img data-ng-src="{{question.mediaUrl}}" class="img-responsive"/>
+                    </td>
                     <td>{{question.commentCount}}</td>
-                    <td>{{question.createDate | date:'medium'}}</td>
-                    <td>{{question.lastModifiedDate | date:'medium'}}</td>
                     <td>
                         <a ui-sref="lov.detail({id:question.category.id})">{{question.category.name}}</a>
                     </td>
@@ -48,6 +48,8 @@
                     <td>
                         {{question.user.login}}
                     </td>
+                    <td>{{question.createDate | date:'medium'}}</td>
+                    <td>{{question.lastModifiedDate | date:'medium'}}</td>
                     <td>
                         <button type="submit"
                                 ui-sref="question.detail({id:question.id})"

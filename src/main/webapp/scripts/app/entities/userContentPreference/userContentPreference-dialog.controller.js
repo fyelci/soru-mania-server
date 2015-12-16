@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('soruManiaApp').controller('UserContentPreferenceDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'UserContentPreference', 'User', 'Lov',
-        function($scope, $stateParams, $uibModalInstance, entity, UserContentPreference, User, Lov) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'UserContentPreference', 'User', 'LovType',
+        function($scope, $stateParams, $uibModalInstance, entity, UserContentPreference, User, LovType) {
 
         $scope.userContentPreference = entity;
         $scope.users = User.query();
-        $scope.lovs = Lov.query();
+        $scope.contentTypes = LovType.get({type:'CONTENT_TYPE'});
+        $scope.contentPreferences = LovType.get({type:'CONTENT_PREFERENCE'});
         $scope.load = function(id) {
             UserContentPreference.get({id : id}, function(result) {
                 $scope.userContentPreference = result;

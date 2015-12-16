@@ -8,7 +8,7 @@ angular.module('soruManiaApp')
                 url: '/lovs',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'Lovs'
+                    pageTitle: 'Parametreler'
                 },
                 views: {
                     'content@': {
@@ -24,7 +24,7 @@ angular.module('soruManiaApp')
                 url: '/lov/{id}',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'Lov'
+                    pageTitle: 'Parametre'
                 },
                 views: {
                     'content@': {

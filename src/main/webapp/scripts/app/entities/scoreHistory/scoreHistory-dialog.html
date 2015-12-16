@@ -40,13 +40,13 @@
         </div>
         <div class="form-group">
             <label for="field_transactionType">transactionType</label>
-            <select class="form-control" id="field_transactionType" name="transactionType" ng-model="scoreHistory.transactionType" ng-options="lov as lov.name for lov in lovs track by lov.id">
+            <select class="form-control" id="field_transactionType" name="transactionType" ng-model="scoreHistory.transactionType" ng-options="lov as lov.name for lov in transactionTypes track by lov.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
             <label for="field_contentType">contentType</label>
-            <select class="form-control" id="field_contentType" name="contentType" ng-model="scoreHistory.contentType" ng-options="lov as lov.name for lov in lovs track by lov.id">
+            <select class="form-control" id="field_contentType" name="contentType" ng-model="scoreHistory.contentType" ng-options="lov as lov.name for lov in contentTypes track by lov.id">
                 <option value=""></option>
             </select>
         </div>

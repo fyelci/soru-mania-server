@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('soruManiaApp').controller('UserRelationDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'UserRelation', 'User', 'Lov',
-        function($scope, $stateParams, $uibModalInstance, entity, UserRelation, User, Lov) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'UserRelation', 'User', 'LovType',
+        function($scope, $stateParams, $uibModalInstance, entity, UserRelation, User, LovType) {
 
         $scope.userRelation = entity;
         $scope.users = User.query();
-        $scope.lovs = Lov.query();
+        $scope.lovs = LovType.get({type:'USER_RELATION_TYPE'});
         $scope.load = function(id) {
             UserRelation.get({id : id}, function(result) {
                 $scope.userRelation = result;

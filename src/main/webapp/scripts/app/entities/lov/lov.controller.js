@@ -1,15 +1,31 @@
 'use strict';
 
 angular.module('soruManiaApp')
-    .controller('LovController', function ($scope, $state, Lov) {
+    .controller('LovController', function ($scope, $state, $uibModal, Lov, LovType) {
 
         $scope.lovs = [];
+        $scope.lovTypes = [];
+        $scope.selectedLovType = {};
+
         $scope.loadAll = function() {
             Lov.query(function(result) {
                $scope.lovs = result;
             });
         };
-        $scope.loadAll();
+
+        $scope.loadLovList = function() {
+            LovType.query({type:$scope.selectedLovType.name}, function(result) {
+               $scope.lovs = result;
+            });
+        };
+
+        $scope.loadTypes = function() {
+            LovType.query(function(result) {
+               $scope.lovTypes = result;
+            });
+        };
+
+        $scope.loadTypes();
 
 
         $scope.refresh = function () {

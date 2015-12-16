@@ -1,11 +1,13 @@
 'use strict';
 
 angular.module('soruManiaApp').controller('QuestionDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Question', 'Lov', 'User',
-        function($scope, $stateParams, $uibModalInstance, entity, Question, Lov, User) {
+    ['$scope', '$stateParams', '$modalInstance', 'entity', 'Question', 'LovType', 'User',
+        function($scope, $stateParams, $uibModalInstance, entity, Question, LovType, User) {
 
         $scope.question = entity;
-        $scope.lovs = Lov.query();
+        $scope.categories = LovType.get({type:'CATEGORY'});
+        $scope.lessons = LovType.get({type:'LESSON'});
+        $scope.questionStatuses = LovType.get({type:'QUESTION_STATUS'});
         $scope.users = User.query();
         $scope.load = function(id) {
             Question.get({id : id}, function(result) {

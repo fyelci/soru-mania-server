@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('soruManiaApp').controller('ReportedContentDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'ReportedContent', 'Lov', 'Question', 'Comment', 'User',
-        function($scope, $stateParams, $uibModalInstance, entity, ReportedContent, Lov, Question, Comment, User) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'ReportedContent', 'LovType', 'Question', 'Comment', 'User',
+        function($scope, $stateParams, $uibModalInstance, entity, ReportedContent, LovType, Question, Comment, User) {
 
         $scope.reportedContent = entity;
-        $scope.lovs = Lov.query();
+        $scope.lovs = LovType.get({type:'REPORTED_TYPE'});
         $scope.questions = Question.query();
         $scope.comments = Comment.query();
         $scope.users = User.query();

@@ -20,10 +20,10 @@
             </tr>
             <tr>
                 <td>
-                    <span>MediaUrl</span>
+                    <span>Media</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{question.mediaUrl}}</span>
+                    <img data-ng-src="{{question.mediaUrl}}" class="img-responsive"/>
                 </td>
             </tr>
             <tr>
@@ -52,7 +52,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>category</span>
+                    <span>Sınav</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="lov.detail({id:question.category.id})">{{question.category.name}}</a>
@@ -60,7 +60,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>lesson</span>
+                    <span>Ders</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="lov.detail({id:question.lesson.id})">{{question.lesson.name}}</a>
