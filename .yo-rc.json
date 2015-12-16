@@ -1,0 +1,24 @@
+{
+  "generator-jhipster": {
+    "baseName": "SoruMania",
+    "packageName": "com.fyelci.sorumania",
+    "packageFolder": "com/fyelci/sorumania",
+    "authenticationType": "oauth2",
+    "hibernateCache": "ehcache",
+    "clusteredHttpSession": "no",
+    "websocket": "no",
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": "no",
+    "useSass": false,
+    "buildTool": "maven",
+    "frontendBuilder": "grunt",
+    "enableTranslation": false,
+    "enableSocialSignIn": false,
+    "rememberMeKey": "cade0f0c9eb96b3a41b8761d6e7308c18ade1915",
+    "testFrameworks": [
+      "gatling"
+    ]
+  }
+}
