@@ -1,0 +1,54 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "type",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "strParam1",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "strParam2",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "intParam1",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "status",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "sequence",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20151126111438",
+    "dto": "no",
+    "pagination": "no"
+}

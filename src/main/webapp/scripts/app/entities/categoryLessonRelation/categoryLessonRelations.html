@@ -1,0 +1,68 @@
+<div>
+    <h2>Sınav Ders Eşleşmesi</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                Bu ekran hangi sınavda hangi derslerin seçilebileceğini belirlemek için kullanılır.<br/>
+                Bir sınav için hiç tanım yapılmazsa o sınavda tüm dersler gösterilecektir.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="categoryLessonRelation.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new CategoryLessonRelation</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="category.name"><span>Sınav</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lesson.name"><span>Ders</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createDate"><span>CreateDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span>LastModifiedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="categoryLessonRelation in categoryLessonRelations track by categoryLessonRelation.id">
+                    <td><a ui-sref="categoryLessonRelation.detail({id:categoryLessonRelation.id})">{{categoryLessonRelation.id}}</a></td>
+                    <td>
+                        <a ui-sref="lov.detail({id:categoryLessonRelation.category.id})">{{categoryLessonRelation.category.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="lov.detail({id:categoryLessonRelation.lesson.id})">{{categoryLessonRelation.lesson.name}}</a>
+                    </td>
+                    <td>{{categoryLessonRelation.createDate | date:'medium'}}</td>
+                    <td>{{categoryLessonRelation.lastModifiedDate | date:'medium'}}</td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="categoryLessonRelation.detail({id:categoryLessonRelation.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="categoryLessonRelation.edit({id:categoryLessonRelation.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="categoryLessonRelation.delete({id:categoryLessonRelation.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pagination>
+    </div>
+</div>

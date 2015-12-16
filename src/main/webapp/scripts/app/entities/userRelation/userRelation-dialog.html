@@ -1,0 +1,56 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myUserRelationLabel">Create or edit a UserRelation</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="userRelation.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_createDate">CreateDate</label>
+            <input type="datetime-local" class="form-control" name="createDate" id="field_createDate"
+                    ng-model="userRelation.createDate"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_lastModifiedDate">LastModifiedDate</label>
+            <input type="datetime-local" class="form-control" name="lastModifiedDate" id="field_lastModifiedDate"
+                    ng-model="userRelation.lastModifiedDate"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label for="field_user">user</label>
+            <select class="form-control" id="field_user" name="user" ng-model="userRelation.user" ng-options="user as user.login for user in users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_relatedUser">relatedUser</label>
+            <select class="form-control" id="field_relatedUser" name="relatedUser" ng-model="userRelation.relatedUser" ng-options="user as user.login for user in users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_relationType">relationType</label>
+            <select class="form-control" id="field_relationType" name="relationType" ng-model="userRelation.relationType" ng-options="lov as lov.name for lov in lovs track by lov.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

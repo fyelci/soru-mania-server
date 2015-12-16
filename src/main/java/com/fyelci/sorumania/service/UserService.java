@@ -94,8 +94,8 @@ public class UserService {
         newUser.setLastName(lastName);
         newUser.setEmail(email);
         newUser.setLangKey(langKey);
-        // new user is not active
-        newUser.setActivated(false);
+        // all users are active
+        newUser.setActivated(true);
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         authorities.add(authority);
@@ -187,7 +187,8 @@ public class UserService {
      * This is scheduled to get fired everyday, at 01:00 (am).
      * </p>
      */
-    @Scheduled(cron = "0 0 1 * * ?")
+    //@Scheduled(cron = "0 0 1 * * ?")
+    //Ihtiyacimiz olmadigindan kapatildi. fatih
     public void removeNotActivatedUsers() {
         ZonedDateTime now = ZonedDateTime.now();
         List<User> users = userRepository.findAllByActivatedIsFalseAndCreatedDateBefore(now.minusDays(3));

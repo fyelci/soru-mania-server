@@ -1,0 +1,73 @@
+<div>
+    <h2>Questions</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="question.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new Question</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="detail"><span>Detail</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="mediaUrl"><span>MediaUrl</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="commentCount"><span>CommentCount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createDate"><span>CreateDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span>LastModifiedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="category.name"><span>category</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lesson.name"><span>lesson</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="questionStatus.name"><span>questionStatus</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="user.login"><span>user</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="question in questions track by question.id">
+                    <td><a ui-sref="question.detail({id:question.id})">{{question.id}}</a></td>
+                    <td>{{question.detail}}</td>
+                    <td>{{question.mediaUrl}}</td>
+                    <td>{{question.commentCount}}</td>
+                    <td>{{question.createDate | date:'medium'}}</td>
+                    <td>{{question.lastModifiedDate | date:'medium'}}</td>
+                    <td>
+                        <a ui-sref="lov.detail({id:question.category.id})">{{question.category.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="lov.detail({id:question.lesson.id})">{{question.lesson.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="lov.detail({id:question.questionStatus.id})">{{question.questionStatus.name}}</a>
+                    </td>
+                    <td>
+                        {{question.user.login}}
+                    </td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="question.detail({id:question.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="question.edit({id:question.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="question.delete({id:question.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <uib-pager total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pager>
+</div>

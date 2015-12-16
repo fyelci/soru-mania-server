@@ -1,0 +1,5 @@
+id;category_id;lesson_id;question_status_id;media_url;user_id;create_date;last_modified_date
+1;3;101;200;http://kpssbil.net/images/kpss-matematik-ortaogretim-2012-koklu-sayilar-548-.jpeg;3;null;null
+2;1;102;200;http://lh6.ggpht.com/drcetiner/SF50YmI5llI/AAAAAAAAAxA/SSGdzXWyCRQ/sbs-7-turkce-12.PNG;4;null;null
+3;5;102;200;http://kpssbil.net/images/kpss-aturkce-lisans-2013-ornek-soru-755-.jpeg;3;null;null
+4;3;103;200;http://img.haberler.com/galeri/54/lys-1-geometri-soru-ve-cevaplari_44831_b.jpg;4;null;null

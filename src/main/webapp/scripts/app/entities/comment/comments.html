@@ -1,0 +1,69 @@
+<div>
+    <h2>Comments</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="comment.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new Comment</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="text"><span>Text</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="mediaUrl"><span>MediaUrl</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createDate"><span>CreateDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span>LastModifiedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="parentId"><span>ParentId</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="question.id"><span>question</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="user.login"><span>user</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="commentStatus.name"><span>commentStatus</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="comment in comments track by comment.id">
+                    <td><a ui-sref="comment.detail({id:comment.id})">{{comment.id}}</a></td>
+                    <td>{{comment.text}}</td>
+                    <td>{{comment.mediaUrl}}</td>
+                    <td>{{comment.createDate | date:'medium'}}</td>
+                    <td>{{comment.lastModifiedDate | date:'medium'}}</td>
+                    <td>{{comment.parentId}}</td>
+                    <td>
+                        <a ui-sref="question.detail({id:comment.question.id})">{{comment.question.id}}</a>
+                    </td>
+                    <td>
+                        {{comment.user.login}}
+                    </td>
+                    <td>
+                        <a ui-sref="lov.detail({id:comment.commentStatus.id})">{{comment.commentStatus.name}}</a>
+                    </td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="comment.detail({id:comment.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="comment.edit({id:comment.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="comment.delete({id:comment.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <uib-pager total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pager>
+</div>

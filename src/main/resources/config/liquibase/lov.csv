@@ -1,0 +1,60 @@
+id;type;name;status;sequence;description;int_param1;str_param1
+1;CATEGORY;KPSS;true;10;;null;fa-suitcase
+2;CATEGORY;LYS;true;20;;null;fa-tachometer
+3;CATEGORY;YGS;true;30;;null;fa-tachometer
+4;CATEGORY;ALES;true;40;;null;fa-graduation-cap
+5;CATEGORY;TEOG;true;50;;null;fa-tachometer
+6;CATEGORY;DGS;true;60;;null;fa-tachometer
+7;CATEGORY;YDS;true;70;;null;fa-language
+
+100;LESSON;Türkçe;true;10;;null;fa-pencil
+101;LESSON;Metematik;true;20;;null;fa-bar-chart
+102;LESSON;Edebiyat;true;30;;null;fa-book
+103;LESSON;Geometri;true;40;;null;fa-pie-chart
+104;LESSON;Fizik;true;50;;null;fa-cubes
+105;LESSON;Kimya;true;60;;null;fa-search
+106;LESSON;Biyoloji;true;70;;null;fa-search
+107;LESSON;Tarih;true;80;;null;fa-file-archive-o
+108;LESSON;Coğrafya;true;90;;null;fa-globe
+109;LESSON;Felsefe;true;100;;null;fa-binoculars
+110;LESSON;Yabancı Dil;true;110;;null;fa-language
+
+
+200;QUESTION_STATUS;Aktif;true;10;;null;
+201;QUESTION_STATUS;Silindi;true;20;;null;
+202;QUESTION_STATUS;Şikayet edildi;true;30;;null;
+
+
+300;USER_RELATION_TYPE;Bekliyor;true;10;;null;
+301;USER_RELATION_TYPE;Onaylandı;true;20;;null;
+302;USER_RELATION_TYPE;Reddedildi;true;30;;null;
+303;USER_RELATION_TYPE;Engellendi;true;40;;null;
+304;USER_RELATION_TYPE;Silindi;true;50;;null;
+
+
+400;CONTENT_TYPE;Kategori;true;10;;null;
+401;CONTENT_TYPE;Soru;true;20;;null;
+402;CONTENT_TYPE;Ders;true;30;;null;
+403;CONTENT_TYPE;Yorum;true;40;;null;
+
+
+500;REPORTED_TYPE;Uygunsuz içerik;true;10;;null;
+501;REPORTED_TYPE;Spam içerik;true;20;;null;
+
+600;SCORE_TRANSACTION_TYPE;Soru Sorma;true;10;;5;
+601;SCORE_TRANSACTION_TYPE;Cevap Verme;true;20;;10;
+
+700;COMMENT_STATUS;Aktif;true;10;;null;
+701;COMMENT_STATUS;Silindi;true;20;;null;
+
+800;CONTENT_PREFERENCE;Gizle;true;10;;null;
+801;CONTENT_PREFERENCE;Göster;true;20;;null;
+802;CONTENT_PREFERENCE;Takip Et;true;30;;null;
+
+
+
+
+1000;MANAGABLE_TYPES;CATEGORY;true;10;Sınavlar;null;
+1001;MANAGABLE_TYPES;LESSON;true;20;Dersler;null;
+1002;MANAGABLE_TYPES;REPORTED_TYPE;true;30;Şikayet Tipi;null;
+1003;MANAGABLE_TYPES;SCORE_TRANSACTION_TYPE;true;40;Puan Kazanma Tipleri;null;

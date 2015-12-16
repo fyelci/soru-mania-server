@@ -1,0 +1,70 @@
+
+<div>
+    <h2><span>ReportedContent</span> {{reportedContent.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>CreateDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{reportedContent.createDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>LastModifiedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{reportedContent.lastModifiedDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>type</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="lov.detail({id:reportedContent.type.id})">{{reportedContent.type.name}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>question</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="question.detail({id:reportedContent.question.id})">{{reportedContent.question.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>comment</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="comment.detail({id:reportedContent.comment.id})">{{reportedContent.comment.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>reporterUser</span>
+                </td>
+                <td>
+                    {{reportedContent.reporterUser.login}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

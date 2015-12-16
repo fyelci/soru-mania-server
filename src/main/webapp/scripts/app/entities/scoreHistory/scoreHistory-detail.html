@@ -1,0 +1,70 @@
+
+<div>
+    <h2><span>ScoreHistory</span> {{scoreHistory.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>Score</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{scoreHistory.score}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ContentId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{scoreHistory.contentId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>CreateDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{scoreHistory.createDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>user</span>
+                </td>
+                <td>
+                    {{scoreHistory.user.login}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>transactionType</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="lov.detail({id:scoreHistory.transactionType.id})">{{scoreHistory.transactionType.name}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>contentType</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="lov.detail({id:scoreHistory.contentType.id})">{{scoreHistory.contentType.name}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

@@ -1,0 +1,86 @@
+
+<div>
+    <h2><span>Comment</span> {{comment.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>Text</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{comment.text}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>MediaUrl</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{comment.mediaUrl}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>CreateDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{comment.createDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>LastModifiedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{comment.lastModifiedDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ParentId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{comment.parentId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>question</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="question.detail({id:comment.question.id})">{{comment.question.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>user</span>
+                </td>
+                <td>
+                    {{comment.user.login}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>commentStatus</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="lov.detail({id:comment.commentStatus.id})">{{comment.commentStatus.name}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

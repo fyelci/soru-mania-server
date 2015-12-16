@@ -1,0 +1,62 @@
+<div>
+    <h2>Lovs</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="lov.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new Lov</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Type</span></th>
+                    <th><span>Name</span></th>
+                    <th><span>StrParam1</span></th>
+                    <th><span>StrParam2</span></th>
+                    <th><span>IntParam1</span></th>
+                    <th><span>Description</span></th>
+                    <th><span>Status</span></th>
+                    <th><span>Sequence</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="lov in lovs track by lov.id">
+                    <td><a ui-sref="lov.detail({id:lov.id})">{{lov.id}}</a></td>
+                    <td>{{lov.type}}</td>
+                    <td>{{lov.name}}</td>
+                    <td>{{lov.strParam1}}</td>
+                    <td>{{lov.strParam2}}</td>
+                    <td>{{lov.intParam1}}</td>
+                    <td>{{lov.description}}</td>
+                    <td>{{lov.status}}</td>
+                    <td>{{lov.sequence}}</td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="lov.detail({id:lov.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="lov.edit({id:lov.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="lov.delete({id:lov.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

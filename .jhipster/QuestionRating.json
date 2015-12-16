@@ -1,0 +1,45 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "question",
+            "otherEntityName": "question",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "rate",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": "1",
+            "fieldValidateRulesMaxlength": "10"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "createDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "lastModifiedDate",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "changelogDate": "20151126163113",
+    "dto": "no",
+    "pagination": "pagination"
+}

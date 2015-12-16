@@ -1,0 +1,62 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "category",
+            "otherEntityName": "lov",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "lesson",
+            "otherEntityName": "lov",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "questionStatus",
+            "otherEntityName": "lov",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipId": 4,
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "detail",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "mediaUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "commentCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "createDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "lastModifiedDate",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "changelogDate": "20151125133119",
+    "dto": "no",
+    "pagination": "pager"
+}

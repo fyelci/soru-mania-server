@@ -1,0 +1,69 @@
+<div>
+    <h2>ReportedContents</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="reportedContent.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new ReportedContent</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createDate"><span>CreateDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span>LastModifiedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="type.name"><span>type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="question.id"><span>question</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="comment.id"><span>comment</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="reporterUser.login"><span>reporterUser</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="reportedContent in reportedContents track by reportedContent.id">
+                    <td><a ui-sref="reportedContent.detail({id:reportedContent.id})">{{reportedContent.id}}</a></td>
+                    <td>{{reportedContent.createDate | date:'medium'}}</td>
+                    <td>{{reportedContent.lastModifiedDate | date:'medium'}}</td>
+                    <td>
+                        <a ui-sref="lov.detail({id:reportedContent.type.id})">{{reportedContent.type.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="question.detail({id:reportedContent.question.id})">{{reportedContent.question.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="comment.detail({id:reportedContent.comment.id})">{{reportedContent.comment.id}}</a>
+                    </td>
+                    <td>
+                        {{reportedContent.reporterUser.login}}
+                    </td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="reportedContent.detail({id:reportedContent.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="reportedContent.edit({id:reportedContent.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="reportedContent.delete({id:reportedContent.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pagination>
+    </div>
+</div>

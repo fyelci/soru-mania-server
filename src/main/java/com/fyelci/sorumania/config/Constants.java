@@ -16,6 +16,10 @@ public final class Constants {
 
     public static final String SYSTEM_ACCOUNT = "system";
 
+    public static String MANAGABLE_LOV_TYPES = "MANAGABLE_TYPES";
+
     private Constants() {
     }
+
+
 }

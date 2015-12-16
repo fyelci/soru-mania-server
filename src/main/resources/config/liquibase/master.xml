@@ -5,5 +5,16 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <include file="classpath:config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151126111438_added_entity_Lov.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151125133119_added_entity_Question.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151215133119_added_entity_CategoryLessonRelation.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151126091623_added_entity_Comment.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151126163113_added_entity_QuestionRating.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151126153119_added_entity_ReportedContent.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151126160119_added_entity_ScoreHistory.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151127103113_added_entity_UserContentPreference.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151126134859_added_entity_UserRelation.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/data_01_sample_data.xml" relativeToChangelogFile="false"/>
+
     <!-- jhipster-needle-005 - JHipster will add liquibase changelogs here -->
 </databaseChangeLog>

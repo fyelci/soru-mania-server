@@ -1,0 +1,54 @@
+
+<div>
+    <h2><span>CategoryLessonRelation</span> {{categoryLessonRelation.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>Sınav</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="lov.detail({id:categoryLessonRelation.category.id})">{{categoryLessonRelation.category.name}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Ders</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="lov.detail({id:categoryLessonRelation.lesson.id})">{{categoryLessonRelation.lesson.name}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>CreateDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{categoryLessonRelation.createDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>LastModifiedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{categoryLessonRelation.lastModifiedDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

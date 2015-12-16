@@ -1,0 +1,80 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myQuestionLabel">Create or edit a Question</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="question.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_detail">Detail</label>
+            <input type="text" class="form-control" name="detail" id="field_detail"
+                    ng-model="question.detail"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_mediaUrl">MediaUrl</label>
+            <input type="text" class="form-control" name="mediaUrl" id="field_mediaUrl"
+                    ng-model="question.mediaUrl"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_commentCount">CommentCount</label>
+            <input type="number" class="form-control" name="commentCount" id="field_commentCount"
+                    ng-model="question.commentCount"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_createDate">CreateDate</label>
+            <input type="datetime-local" class="form-control" name="createDate" id="field_createDate"
+                    ng-model="question.createDate"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_lastModifiedDate">LastModifiedDate</label>
+            <input type="datetime-local" class="form-control" name="lastModifiedDate" id="field_lastModifiedDate"
+                    ng-model="question.lastModifiedDate"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label for="field_category">category</label>
+            <select class="form-control" id="field_category" name="category" ng-model="question.category" ng-options="lov as lov.name for lov in lovs track by lov.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_lesson">lesson</label>
+            <select class="form-control" id="field_lesson" name="lesson" ng-model="question.lesson" ng-options="lov as lov.name for lov in lovs track by lov.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_questionStatus">questionStatus</label>
+            <select class="form-control" id="field_questionStatus" name="questionStatus" ng-model="question.questionStatus" ng-options="lov as lov.name for lov in lovs track by lov.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_user">user</label>
+            <select class="form-control" id="field_user" name="user" ng-model="question.user" ng-options="user as user.login for user in users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

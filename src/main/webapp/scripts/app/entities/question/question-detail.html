@@ -1,0 +1,94 @@
+
+<div>
+    <h2><span>Question</span> {{question.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>Detail</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{question.detail}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>MediaUrl</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{question.mediaUrl}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>CommentCount</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{question.commentCount}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>CreateDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{question.createDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>LastModifiedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{question.lastModifiedDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>category</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="lov.detail({id:question.category.id})">{{question.category.name}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>lesson</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="lov.detail({id:question.lesson.id})">{{question.lesson.name}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>questionStatus</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="lov.detail({id:question.questionStatus.id})">{{question.questionStatus.name}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>user</span>
+                </td>
+                <td>
+                    {{question.user.login}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

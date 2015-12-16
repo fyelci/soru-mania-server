@@ -1,0 +1,63 @@
+<div>
+    <h2>QuestionRatings</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="questionRating.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new QuestionRating</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="rate"><span>Rate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createDate"><span>CreateDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span>LastModifiedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="question.id"><span>question</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="user.login"><span>user</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="questionRating in questionRatings track by questionRating.id">
+                    <td><a ui-sref="questionRating.detail({id:questionRating.id})">{{questionRating.id}}</a></td>
+                    <td>{{questionRating.rate}}</td>
+                    <td>{{questionRating.createDate | date:'medium'}}</td>
+                    <td>{{questionRating.lastModifiedDate | date:'medium'}}</td>
+                    <td>
+                        <a ui-sref="question.detail({id:questionRating.question.id})">{{questionRating.question.id}}</a>
+                    </td>
+                    <td>
+                        {{questionRating.user.login}}
+                    </td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="questionRating.detail({id:questionRating.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="questionRating.edit({id:questionRating.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="questionRating.delete({id:questionRating.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pagination>
+    </div>
+</div>

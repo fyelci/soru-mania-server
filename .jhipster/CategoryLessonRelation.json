@@ -1,0 +1,33 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "category",
+            "otherEntityName": "lov",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "lesson",
+            "otherEntityName": "lov",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "createDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "lastModifiedDate",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "changelogDate": "20151215133119",
+    "dto": "no",
+    "pagination": "pagination"
+}

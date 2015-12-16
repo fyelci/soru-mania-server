@@ -1,0 +1,46 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "transactionType",
+            "otherEntityName": "lov",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "contentType",
+            "otherEntityName": "lov",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "score",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "contentId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "createDate",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "changelogDate": "20151126160119",
+    "dto": "no",
+    "pagination": "pagination"
+}

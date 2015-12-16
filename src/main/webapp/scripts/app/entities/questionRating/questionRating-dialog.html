@@ -1,0 +1,74 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myQuestionRatingLabel">Create or edit a QuestionRating</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="questionRating.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_rate">Rate</label>
+            <input type="number" class="form-control" name="rate" id="field_rate"
+                    ng-model="questionRating.rate"
+                    required ng-minlength="1" ng-maxlength="10" />
+            <div ng-show="editForm.rate.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.rate.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.rate.$error.minlength" translate-value-min="1">
+                    This field is required to be at least 1 characters.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.rate.$error.maxlength" translate-value-max="10">
+                    This field cannot be longer than 10 characters.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.rate.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_createDate">CreateDate</label>
+            <input type="datetime-local" class="form-control" name="createDate" id="field_createDate"
+                    ng-model="questionRating.createDate"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_lastModifiedDate">LastModifiedDate</label>
+            <input type="datetime-local" class="form-control" name="lastModifiedDate" id="field_lastModifiedDate"
+                    ng-model="questionRating.lastModifiedDate"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label for="field_question">question</label>
+            <select class="form-control" id="field_question" name="question" ng-model="questionRating.question" ng-options="question as question.id for question in questions track by question.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_user">user</label>
+            <select class="form-control" id="field_user" name="user" ng-model="questionRating.user" ng-options="user as user.login for user in users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

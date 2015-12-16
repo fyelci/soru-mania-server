@@ -1,0 +1,67 @@
+<div>
+    <h2>UserContentPreferences</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="userContentPreference.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new UserContentPreference</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contentId"><span>ContentId</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createDate"><span>CreateDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span>LastModifiedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="user.login"><span>user</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contentType.name"><span>contentType</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contentPreference.name"><span>contentPreference</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="userContentPreference in userContentPreferences track by userContentPreference.id">
+                    <td><a ui-sref="userContentPreference.detail({id:userContentPreference.id})">{{userContentPreference.id}}</a></td>
+                    <td>{{userContentPreference.contentId}}</td>
+                    <td>{{userContentPreference.createDate | date:'medium'}}</td>
+                    <td>{{userContentPreference.lastModifiedDate | date:'medium'}}</td>
+                    <td>
+                        {{userContentPreference.user.login}}
+                    </td>
+                    <td>
+                        <a ui-sref="lov.detail({id:userContentPreference.contentType.id})">{{userContentPreference.contentType.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="lov.detail({id:userContentPreference.contentPreference.id})">{{userContentPreference.contentPreference.name}}</a>
+                    </td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="userContentPreference.detail({id:userContentPreference.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="userContentPreference.edit({id:userContentPreference.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="userContentPreference.delete({id:userContentPreference.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pagination>
+    </div>
+</div>
