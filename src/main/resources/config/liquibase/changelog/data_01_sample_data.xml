@@ -29,6 +29,13 @@
             <column name="create_date" type="timestamp"/>
         </loadData>
 
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/comment.csv"
+                  separator=";"
+                  tableName="comment">
+            <column name="create_date" type="timestamp"/>
+        </loadData>
+
 
     </changeSet>
 
