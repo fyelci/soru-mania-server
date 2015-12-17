@@ -78,6 +78,10 @@ angular.module('soruManiaApp', ['LocalStorageModule',
         $httpProvider.interceptors.push('notificationInterceptor');
         
     })
+    // Initialize material design
+    .config(function () {
+        $.material.init();
+    })
     // jhipster-needle-angularjs-add-config JHipster will add new application configuration
     .config(['$urlMatcherFactoryProvider', function($urlMatcherFactory) {
         $urlMatcherFactory.type('boolean', {
