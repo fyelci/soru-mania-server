@@ -151,7 +151,8 @@ public class AccountResourceIntTest {
             "joe@example.com",      // e-mail
             true,                   // activated
             "en",                   // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
+            "http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png"                      // profileImageUrl
         );
 
         restMvc.perform(
@@ -175,7 +176,8 @@ public class AccountResourceIntTest {
             "funky@example.com",    // e-mail
             true,                   // activated
             "en",                   // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
+            "http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png"
         );
 
         restUserMockMvc.perform(
@@ -199,7 +201,8 @@ public class AccountResourceIntTest {
             "invalid",          // e-mail <-- invalid
             true,               // activated
             "en",               // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
+            "http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png"
         );
 
         restUserMockMvc.perform(
@@ -224,12 +227,13 @@ public class AccountResourceIntTest {
             "alice@example.com",    // e-mail
             true,                   // activated
             "en",                   // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
+            "http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png"
         );
 
         // Duplicate login, different e-mail
         UserDTO dup = new UserDTO(u.getLogin(), u.getPassword(), u.getLogin(), u.getLastName(),
-            "alicejr@example.com", true, u.getLangKey(), u.getAuthorities());
+            "alicejr@example.com", true, u.getLangKey(), u.getAuthorities(), u.getProfileImageUrl());
 
         // Good user
         restMvc.perform(
@@ -261,12 +265,13 @@ public class AccountResourceIntTest {
             "john@example.com",     // e-mail
             true,                   // activated
             "en",                   // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
+            "http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png"
         );
 
         // Duplicate e-mail, different login
         UserDTO dup = new UserDTO("johnjr", u.getPassword(), u.getLogin(), u.getLastName(),
-            u.getEmail(), true, u.getLangKey(), u.getAuthorities());
+            u.getEmail(), true, u.getLangKey(), u.getAuthorities(), u.getProfileImageUrl());
 
         // Good user
         restMvc.perform(
@@ -297,7 +302,8 @@ public class AccountResourceIntTest {
             "badguy@example.com",   // e-mail
             true,                   // activated
             "en",                   // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.ADMIN)) // <-- only admin should be able to do that
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.ADMIN)), // <-- only admin should be able to do that
+            "http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png"
         );
 
         restMvc.perform(

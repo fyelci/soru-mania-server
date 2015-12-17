@@ -34,7 +34,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @JsonIgnore
     @NotNull
-    @Size(min = 60, max = 60) 
+    @Size(min = 60, max = 60)
     @Column(name = "password_hash",length = 60)
     private String password;
 
@@ -66,6 +66,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Size(max = 20)
     @Column(name = "reset_key", length = 20)
     private String resetKey;
+
+    @Size(max = 511)
+    @Column(name = "profile_image_url", length = 511)
+    private String profileImageUrl;
 
     @Column(name = "reset_date", nullable = true)
     private ZonedDateTime resetDate = null;
@@ -149,6 +153,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setResetKey(String resetKey) {
         this.resetKey = resetKey;
+    }
+
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
     }
 
     public ZonedDateTime getResetDate() {

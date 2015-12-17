@@ -1,6 +1,7 @@
 'use strict';
 
 describe('Services Tests ', function () {
+    beforeEach(mockScriptsCalls);
 
     describe('Auth', function () {
         var $httpBackend, spiedLocalStorageService, authService, spiedAuthServerProvider;
@@ -10,11 +11,9 @@ describe('Services Tests ', function () {
             spiedLocalStorageService = localStorageService;
             authService = Auth;
             spiedAuthServerProvider = AuthServerProvider;
-            //Request on app init
-            $httpBackend.whenGET('scripts/app/main/main.html').respond({});
-            $httpBackend.whenGET('scripts/components/navbar/navbar.html').respond({});
+
             $httpBackend.expectPOST(/api\/logout\?cacheBuster=\d+/).respond(200, '');
-          }));
+        }));
         //make sure no expectations were missed in your tests.
         //(e.g. expectGET or expectPOST)
         afterEach(function() {

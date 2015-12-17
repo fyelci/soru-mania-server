@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('soruManiaApp').controller('QuestionDialogController',
-    ['$scope', '$stateParams', '$modalInstance', 'entity', 'Question', 'LovType', 'User',
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Question', 'LovType', 'User',
         function($scope, $stateParams, $uibModalInstance, entity, Question, LovType, User) {
 
         $scope.question = entity;

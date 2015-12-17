@@ -11,6 +11,8 @@ angular.module('soruManiaApp')
         $scope.doNotMatch = null;
         $scope.changePassword = function () {
             if ($scope.password !== $scope.confirmPassword) {
+                $scope.error = null;
+                $scope.success = null;
                 $scope.doNotMatch = 'ERROR';
             } else {
                 $scope.doNotMatch = null;
