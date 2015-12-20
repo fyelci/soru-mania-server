@@ -12,7 +12,7 @@
             <tbody>
             <tr>
                 <td>
-                    <span>Detail</span>
+                    <span>Detay</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{question.detail}}</span>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>Media</span>
+                    <span>Resim</span>
                 </td>
                 <td>
                     <img data-ng-src="{{question.mediaUrl}}" class="img-responsive"/>
@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>CommentCount</span>
+                    <span>Yorum Sayısı</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{question.commentCount}}</span>
@@ -55,7 +55,7 @@
                     <span>Sınav</span>
                 </td>
                 <td>
-                    <a class="form-control-static" ui-sref="lov.detail({id:question.category.id})">{{question.category.name}}</a>
+                    <a class="form-control-static" ui-sref="lov.detail({id:question.categoryId})">{{question.categoryName}}</a>
                 </td>
             </tr>
             <tr>
@@ -63,23 +63,23 @@
                     <span>Ders</span>
                 </td>
                 <td>
-                    <a class="form-control-static" ui-sref="lov.detail({id:question.lesson.id})">{{question.lesson.name}}</a>
+                    <a class="form-control-static" ui-sref="lov.detail({id:question.lessonId})">{{question.lessonName}}</a>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>questionStatus</span>
+                    <span>Soru Durumu</span>
                 </td>
                 <td>
-                    <a class="form-control-static" ui-sref="lov.detail({id:question.questionStatus.id})">{{question.questionStatus.name}}</a>
+                    <a class="form-control-static" ui-sref="lov.detail({id:question.questionStatusId})">{{question.questionStatusName}}</a>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>user</span>
+                    <span>Kullanıcı</span>
                 </td>
                 <td>
-                    {{question.user.login}}
+                    {{question.userLogin}}
                 </td>
             </tr>
             </tbody>

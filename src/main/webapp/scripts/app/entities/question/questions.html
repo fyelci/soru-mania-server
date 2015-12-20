@@ -18,13 +18,13 @@
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="detail"><span>Detay</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="mediaUrl"><span>Resim</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="commentCount"><span>Cevap Sayısı</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="category.name"><span>Sınav</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lesson.name"><span>Ders</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="questionStatus.name"><span>Soru Durumu</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="user.login"><span>Kullanıcı</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="createDate"><span>Oluşturma Tarihi</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lastModifiedDate"><span>Değişiklik Tarihi</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="categoryName"><span>Sınav</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lessonName"><span>Ders</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="questionStatusName"><span>Soru Durumu</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="userLogin"><span>Kullanıcı</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="commentCount"><span>Yorum Sayısı</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createDate"><span>Sorulma Tarihi</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span>Güncellenme Tarihi</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -32,22 +32,20 @@
                 <tr ng-repeat="question in questions track by question.id">
                     <td><a ui-sref="question.detail({id:question.id})">{{question.id}}</a></td>
                     <td>{{question.detail}}</td>
+                    <td><img data-ng-src="{{question.mediaUrl}}" class="img-responsive"/></td>
                     <td>
-                        <img data-ng-src="{{question.mediaUrl}}" class="img-responsive"/>
+                        <a ui-sref="lov.detail({id:question.categoryId})">{{question.categoryName}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="lov.detail({id:question.lessonId})">{{question.lessonName}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="lov.detail({id:question.questionStatusId})">{{question.questionStatusName}}</a>
+                    </td>
+                    <td>
+                        {{question.userLogin}}
                     </td>
                     <td>{{question.commentCount}}</td>
-                    <td>
-                        <a ui-sref="lov.detail({id:question.category.id})">{{question.category.name}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="lov.detail({id:question.lesson.id})">{{question.lesson.name}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="lov.detail({id:question.questionStatus.id})">{{question.questionStatus.name}}</a>
-                    </td>
-                    <td>
-                        {{question.user.login}}
-                    </td>
                     <td>{{question.createDate | date:'medium'}}</td>
                     <td>{{question.lastModifiedDate | date:'medium'}}</td>
                     <td>

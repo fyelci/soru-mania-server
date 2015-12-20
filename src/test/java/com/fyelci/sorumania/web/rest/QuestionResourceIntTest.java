@@ -3,6 +3,8 @@ package com.fyelci.sorumania.web.rest;
 import com.fyelci.sorumania.Application;
 import com.fyelci.sorumania.domain.Question;
 import com.fyelci.sorumania.repository.QuestionRepository;
+import com.fyelci.sorumania.web.rest.dto.QuestionDTO;
+import com.fyelci.sorumania.web.rest.mapper.QuestionMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -67,6 +69,9 @@ public class QuestionResourceIntTest {
     private QuestionRepository questionRepository;
 
     @Inject
+    private QuestionMapper questionMapper;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -81,6 +86,7 @@ public class QuestionResourceIntTest {
         MockitoAnnotations.initMocks(this);
         QuestionResource questionResource = new QuestionResource();
         ReflectionTestUtils.setField(questionResource, "questionRepository", questionRepository);
+        ReflectionTestUtils.setField(questionResource, "questionMapper", questionMapper);
         this.restQuestionMockMvc = MockMvcBuilders.standaloneSetup(questionResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -102,10 +108,11 @@ public class QuestionResourceIntTest {
         int databaseSizeBeforeCreate = questionRepository.findAll().size();
 
         // Create the Question
+        QuestionDTO questionDTO = questionMapper.questionToQuestionDTO(question);
 
         restQuestionMockMvc.perform(post("/api/questions")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(question)))
+                .content(TestUtil.convertObjectToJsonBytes(questionDTO)))
                 .andExpect(status().isCreated());
 
         // Validate the Question in the database
@@ -177,10 +184,11 @@ public class QuestionResourceIntTest {
         question.setCommentCount(UPDATED_COMMENT_COUNT);
         question.setCreateDate(UPDATED_CREATE_DATE);
         question.setLastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
+        QuestionDTO questionDTO = questionMapper.questionToQuestionDTO(question);
 
         restQuestionMockMvc.perform(put("/api/questions")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(question)))
+                .content(TestUtil.convertObjectToJsonBytes(questionDTO)))
                 .andExpect(status().isOk());
 
         // Validate the Question in the database
