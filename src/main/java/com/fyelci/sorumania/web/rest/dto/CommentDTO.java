@@ -33,6 +33,9 @@ public class CommentDTO implements Serializable {
 
     private String commentStatusName;
 
+    private String readableCreateDate;
+    private String readableModifyDate;
+
     public Long getId() {
         return id;
     }
@@ -118,6 +121,23 @@ public class CommentDTO implements Serializable {
 
     public void setCommentStatusName(String lovName) {
         this.commentStatusName = lovName;
+    }
+
+    public String getReadableCreateDate() {
+        return readableCreateDate;
+    }
+
+    public void setReadableCreateDate(String readableCreateDate) {
+        this.readableCreateDate = readableCreateDate;
+    }
+
+
+    public String getReadableModifyDate() {
+        return readableModifyDate;
+    }
+
+    public void setReadableModifyDate(String readableModifyDate) {
+        this.readableModifyDate = readableModifyDate;
     }
 
     @Override

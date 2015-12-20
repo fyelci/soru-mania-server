@@ -9,6 +9,7 @@ import org.mapstruct.*;
  * Mapper for the entity Comment and its DTO CommentDTO.
  */
 @Mapper(componentModel = "spring", uses = {})
+@DecoratedWith(CommentMapperDecorator.class)
 public interface CommentMapper {
 
     @Mapping(source = "question.id", target = "questionId")
@@ -16,6 +17,8 @@ public interface CommentMapper {
     @Mapping(source = "user.login", target = "userLogin")
     @Mapping(source = "commentStatus.id", target = "commentStatusId")
     @Mapping(source = "commentStatus.name", target = "commentStatusName")
+    @Mapping(target = "readableCreateDate", ignore = true)
+    @Mapping(target = "readableModifyDate", ignore = true)
     CommentDTO commentToCommentDTO(Comment comment);
 
     @Mapping(source = "questionId", target = "question")

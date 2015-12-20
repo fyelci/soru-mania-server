@@ -42,6 +42,9 @@ public class QuestionDTO implements Serializable {
 
     List<CommentDTO> commentList = new ArrayList<>();
 
+    private String readableCreateDate;
+    private String readableModifyDate;
+
     public Long getId() {
         return id;
     }
@@ -160,6 +163,23 @@ public class QuestionDTO implements Serializable {
 
     public void setCommentList(List<CommentDTO> commentList) {
         this.commentList = commentList;
+    }
+
+    public String getReadableCreateDate() {
+        return readableCreateDate;
+    }
+
+    public void setReadableCreateDate(String readableCreateDate) {
+        this.readableCreateDate = readableCreateDate;
+    }
+
+
+    public String getReadableModifyDate() {
+        return readableModifyDate;
+    }
+
+    public void setReadableModifyDate(String readableModifyDate) {
+        this.readableModifyDate = readableModifyDate;
     }
 
     @Override

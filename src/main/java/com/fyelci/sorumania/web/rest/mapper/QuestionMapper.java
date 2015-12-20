@@ -9,6 +9,7 @@ import org.mapstruct.*;
  * Mapper for the entity Question and its DTO QuestionDTO.
  */
 @Mapper(componentModel = "spring", uses = {})
+@DecoratedWith(QuestionMapperDecorator.class)
 public interface QuestionMapper {
 
     @Mapping(source = "category.id", target = "categoryId")
@@ -19,6 +20,9 @@ public interface QuestionMapper {
     @Mapping(source = "questionStatus.name", target = "questionStatusName")
     @Mapping(source = "user.id", target = "userId")
     @Mapping(source = "user.login", target = "userLogin")
+    @Mapping(target = "commentList", ignore = true)
+    @Mapping(target = "readableCreateDate", ignore = true)
+    @Mapping(target = "readableModifyDate", ignore = true)
     QuestionDTO questionToQuestionDTO(Question question);
 
     @Mapping(source = "categoryId", target = "category")
