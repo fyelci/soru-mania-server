@@ -40,7 +40,7 @@ public class QuestionDTO implements Serializable {
 
     private String userLogin;
 
-    List<Comment> commentList = new ArrayList<>();
+    List<CommentDTO> commentList = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -154,11 +154,11 @@ public class QuestionDTO implements Serializable {
         this.userLogin = userLogin;
     }
 
-    public List<Comment> getCommentList() {
+    public List<CommentDTO> getCommentList() {
         return commentList;
     }
 
-    public void setCommentList(List<Comment> commentList) {
+    public void setCommentList(List<CommentDTO> commentList) {
         this.commentList = commentList;
     }
 

@@ -1,53 +1,37 @@
-package com.fyelci.sorumania.domain;
+package com.fyelci.sorumania.web.rest.dto;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import java.time.ZonedDateTime;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
-/**
- * A Comment.
- */
-@Entity
-@Table(name = "comment")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Comment implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+/**
+ * A DTO for the Comment entity.
+ */
+public class CommentDTO implements Serializable {
+
     private Long id;
 
-    @Column(name = "text")
     private String text;
 
-    @Column(name = "media_url")
     private String mediaUrl;
 
-    @Column(name = "create_date")
     private ZonedDateTime createDate;
 
-    @Column(name = "last_modified_date")
     private ZonedDateTime lastModifiedDate;
 
-    @Column(name = "parent_id")
     private Long parentId;
 
-    @ManyToOne
-    @JoinColumn(name = "question_id")
-    private Question question;
+    private Long questionId;
+    private Long userId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    private String userLogin;
 
-    @ManyToOne
-    @JoinColumn(name = "comment_status_id")
-    private Lov commentStatus;
+    private Long commentStatusId;
+
+    private String commentStatusName;
 
     public Long getId() {
         return id;
@@ -97,28 +81,43 @@ public class Comment implements Serializable {
         this.parentId = parentId;
     }
 
-    public Question getQuestion() {
-        return question;
+    public Long getQuestionId() {
+        return questionId;
     }
 
-    public void setQuestion(Question question) {
-        this.question = question;
+    public void setQuestionId(Long questionId) {
+        this.questionId = questionId;
+    }
+    public Long getUserId() {
+        return userId;
     }
 
-    public User getUser() {
-        return user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public String getUserLogin() {
+        return userLogin;
     }
 
-    public Lov getCommentStatus() {
-        return commentStatus;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
-    public void setCommentStatus(Lov lov) {
-        this.commentStatus = lov;
+    public Long getCommentStatusId() {
+        return commentStatusId;
+    }
+
+    public void setCommentStatusId(Long lovId) {
+        this.commentStatusId = lovId;
+    }
+
+    public String getCommentStatusName() {
+        return commentStatusName;
+    }
+
+    public void setCommentStatusName(String lovName) {
+        this.commentStatusName = lovName;
     }
 
     @Override
@@ -129,8 +128,12 @@ public class Comment implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Comment comment = (Comment) o;
-        return Objects.equals(id, comment.id);
+
+        CommentDTO commentDTO = (CommentDTO) o;
+
+        if ( ! Objects.equals(id, commentDTO.id)) return false;
+
+        return true;
     }
 
     @Override
@@ -140,7 +143,7 @@ public class Comment implements Serializable {
 
     @Override
     public String toString() {
-        return "Comment{" +
+        return "CommentDTO{" +
             "id=" + id +
             ", text='" + text + "'" +
             ", mediaUrl='" + mediaUrl + "'" +

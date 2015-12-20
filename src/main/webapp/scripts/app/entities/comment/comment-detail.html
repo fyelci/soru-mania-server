@@ -55,7 +55,7 @@
                     <span>question</span>
                 </td>
                 <td>
-                    <a class="form-control-static" ui-sref="question.detail({id:comment.question.id})">{{comment.question.id}}</a>
+                    <a class="form-control-static" ui-sref="question.detail({id:comment.questionId})">{{comment.questionId}}</a>
                 </td>
             </tr>
             <tr>
@@ -63,7 +63,7 @@
                     <span>user</span>
                 </td>
                 <td>
-                    {{comment.user.login}}
+                    {{comment.userLogin}}
                 </td>
             </tr>
             <tr>
@@ -71,7 +71,7 @@
                     <span>commentStatus</span>
                 </td>
                 <td>
-                    <a class="form-control-static" ui-sref="lov.detail({id:comment.commentStatus.id})">{{comment.commentStatus.name}}</a>
+                    <a class="form-control-static" ui-sref="lov.detail({id:comment.commentStatusId})">{{comment.commentStatusName}}</a>
                 </td>
             </tr>
             </tbody>

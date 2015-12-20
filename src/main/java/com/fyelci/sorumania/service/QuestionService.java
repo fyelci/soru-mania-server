@@ -4,6 +4,7 @@ import com.fyelci.sorumania.domain.Comment;
 import com.fyelci.sorumania.domain.Question;
 import com.fyelci.sorumania.repository.CommentRepository;
 import com.fyelci.sorumania.repository.QuestionRepository;
+import com.fyelci.sorumania.web.rest.dto.CommentDTO;
 import com.fyelci.sorumania.web.rest.dto.QuestionDTO;
 import com.fyelci.sorumania.web.rest.mapper.QuestionMapper;
 import org.slf4j.Logger;
@@ -27,7 +28,7 @@ public class QuestionService {
     private QuestionRepository questionRepository;
 
     @Inject
-    private CommentRepository commentRepository;
+    private CommentService commentService;
 
     @Inject
     private QuestionMapper questionMapper;
@@ -37,7 +38,7 @@ public class QuestionService {
         QuestionDTO questionDTO = questionMapper.questionToQuestionDTO(question);
 
         if (question != null) {
-            List<Comment> commentList = commentRepository.findByQuestion(question);
+            List<CommentDTO> commentList = commentService.findQuestionComments(question);
             questionDTO.setCommentList(commentList);
         }
 

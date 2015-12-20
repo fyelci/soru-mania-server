@@ -3,6 +3,9 @@ package com.fyelci.sorumania.web.rest;
 import com.fyelci.sorumania.Application;
 import com.fyelci.sorumania.domain.Comment;
 import com.fyelci.sorumania.repository.CommentRepository;
+import com.fyelci.sorumania.service.CommentService;
+import com.fyelci.sorumania.web.rest.dto.CommentDTO;
+import com.fyelci.sorumania.web.rest.mapper.CommentMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -67,6 +70,12 @@ public class CommentResourceIntTest {
     private CommentRepository commentRepository;
 
     @Inject
+    private CommentMapper commentMapper;
+
+    @Inject
+    private CommentService commentService;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -80,7 +89,8 @@ public class CommentResourceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         CommentResource commentResource = new CommentResource();
-        ReflectionTestUtils.setField(commentResource, "commentRepository", commentRepository);
+        ReflectionTestUtils.setField(commentResource, "commentService", commentService);
+        ReflectionTestUtils.setField(commentResource, "commentMapper", commentMapper);
         this.restCommentMockMvc = MockMvcBuilders.standaloneSetup(commentResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -102,10 +112,11 @@ public class CommentResourceIntTest {
         int databaseSizeBeforeCreate = commentRepository.findAll().size();
 
         // Create the Comment
+        CommentDTO commentDTO = commentMapper.commentToCommentDTO(comment);
 
         restCommentMockMvc.perform(post("/api/comments")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(comment)))
+                .content(TestUtil.convertObjectToJsonBytes(commentDTO)))
                 .andExpect(status().isCreated());
 
         // Validate the Comment in the database
@@ -177,10 +188,11 @@ public class CommentResourceIntTest {
         comment.setCreateDate(UPDATED_CREATE_DATE);
         comment.setLastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
         comment.setParentId(UPDATED_PARENT_ID);
+        CommentDTO commentDTO = commentMapper.commentToCommentDTO(comment);
 
         restCommentMockMvc.perform(put("/api/comments")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(comment)))
+                .content(TestUtil.convertObjectToJsonBytes(commentDTO)))
                 .andExpect(status().isOk());
 
         // Validate the Comment in the database

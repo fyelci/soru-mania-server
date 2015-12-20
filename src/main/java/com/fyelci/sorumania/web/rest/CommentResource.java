@@ -2,9 +2,11 @@ package com.fyelci.sorumania.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.fyelci.sorumania.domain.Comment;
-import com.fyelci.sorumania.repository.CommentRepository;
+import com.fyelci.sorumania.service.CommentService;
 import com.fyelci.sorumania.web.rest.util.HeaderUtil;
 import com.fyelci.sorumania.web.rest.util.PaginationUtil;
+import com.fyelci.sorumania.web.rest.dto.CommentDTO;
+import com.fyelci.sorumania.web.rest.mapper.CommentMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -13,13 +15,16 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing Comment.
@@ -31,7 +36,10 @@ public class CommentResource {
     private final Logger log = LoggerFactory.getLogger(CommentResource.class);
         
     @Inject
-    private CommentRepository commentRepository;
+    private CommentService commentService;
+    
+    @Inject
+    private CommentMapper commentMapper;
     
     /**
      * POST  /comments -> Create a new comment.
@@ -40,12 +48,12 @@ public class CommentResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Comment> createComment(@RequestBody Comment comment) throws URISyntaxException {
-        log.debug("REST request to save Comment : {}", comment);
-        if (comment.getId() != null) {
+    public ResponseEntity<CommentDTO> createComment(@RequestBody CommentDTO commentDTO) throws URISyntaxException {
+        log.debug("REST request to save Comment : {}", commentDTO);
+        if (commentDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("comment", "idexists", "A new comment cannot already have an ID")).body(null);
         }
-        Comment result = commentRepository.save(comment);
+        CommentDTO result = commentService.save(commentDTO);
         return ResponseEntity.created(new URI("/api/comments/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("comment", result.getId().toString()))
             .body(result);
@@ -58,14 +66,14 @@ public class CommentResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Comment> updateComment(@RequestBody Comment comment) throws URISyntaxException {
-        log.debug("REST request to update Comment : {}", comment);
-        if (comment.getId() == null) {
-            return createComment(comment);
+    public ResponseEntity<CommentDTO> updateComment(@RequestBody CommentDTO commentDTO) throws URISyntaxException {
+        log.debug("REST request to update Comment : {}", commentDTO);
+        if (commentDTO.getId() == null) {
+            return createComment(commentDTO);
         }
-        Comment result = commentRepository.save(comment);
+        CommentDTO result = commentService.save(commentDTO);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("comment", comment.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert("comment", commentDTO.getId().toString()))
             .body(result);
     }
 
@@ -76,12 +84,15 @@ public class CommentResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<Comment>> getAllComments(Pageable pageable)
+    @Transactional(readOnly = true)
+    public ResponseEntity<List<CommentDTO>> getAllComments(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Comments");
-        Page<Comment> page = commentRepository.findAll(pageable); 
+        Page<Comment> page = commentService.findAll(pageable); 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/comments");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        return new ResponseEntity<>(page.getContent().stream()
+            .map(commentMapper::commentToCommentDTO)
+            .collect(Collectors.toCollection(LinkedList::new)), headers, HttpStatus.OK);
     }
 
     /**
@@ -91,10 +102,10 @@ public class CommentResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Comment> getComment(@PathVariable Long id) {
+    public ResponseEntity<CommentDTO> getComment(@PathVariable Long id) {
         log.debug("REST request to get Comment : {}", id);
-        Comment comment = commentRepository.findOne(id);
-        return Optional.ofNullable(comment)
+        CommentDTO commentDTO = commentService.findOne(id);
+        return Optional.ofNullable(commentDTO)
             .map(result -> new ResponseEntity<>(
                 result,
                 HttpStatus.OK))
@@ -110,7 +121,7 @@ public class CommentResource {
     @Timed
     public ResponseEntity<Void> deleteComment(@PathVariable Long id) {
         log.debug("REST request to delete Comment : {}", id);
-        commentRepository.delete(id);
+        commentService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("comment", id.toString())).build();
     }
 }

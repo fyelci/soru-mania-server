@@ -51,6 +51,7 @@
         }
     ],
     "changelogDate": "20151126091623",
-    "dto": "no",
+    "dto": "mapstruct",
+    "service": "serviceClass",
     "pagination": "pager"
 }

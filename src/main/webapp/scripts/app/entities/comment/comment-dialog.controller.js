@@ -36,4 +36,22 @@ angular.module('soruManiaApp').controller('CommentDialogController',
         $scope.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };
+        $scope.datePickerForCreateDate = {};
+
+        $scope.datePickerForCreateDate.status = {
+            opened: false
+        };
+
+        $scope.datePickerForCreateDateOpen = function($event) {
+            $scope.datePickerForCreateDate.status.opened = true;
+        };
+        $scope.datePickerForLastModifiedDate = {};
+
+        $scope.datePickerForLastModifiedDate.status = {
+            opened: false
+        };
+
+        $scope.datePickerForLastModifiedDateOpen = function($event) {
+            $scope.datePickerForLastModifiedDate.status.opened = true;
+        };
 }]);
