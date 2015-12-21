@@ -1,0 +1,14 @@
+id;category_id;lesson_id;create_date;last_modified_date
+1;1;101;null;null
+2;1;102;null;null
+3;1;103;null;null
+4;1;107;null;null
+5;1;108;null;null
+6;1;109;null;null
+7;2;100;null;null
+8;2;101;null;null
+9;2;102;null;null
+10;2;103;null;null
+11;2;104;null;null
+12;2;105;null;null
+13;3;110;null;null

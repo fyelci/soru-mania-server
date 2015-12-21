@@ -1,0 +1,29 @@
+id;create_date;last_modified_date;user_id;related_user_id;relation_type_id
+1;2015-12-21 03:15:00;null;3;4;301
+2;2015-12-21 03:15:00;null;3;5;301
+3;2015-12-21 03:15:00;null;3;6;301
+4;2015-12-21 03:15:00;null;3;7;301
+5;2015-12-21 03:15:00;2015-12-21 08:15:00;3;8;301
+6;null;null;3;12;301
+7;null;null;3;13;301
+8;null;null;3;11;301
+9;null;null;4;3;301
+10;null;null;4;5;301
+11;null;null;4;6;301
+12;null;null;4;7;301
+13;null;null;4;8;301
+14;null;null;4;9;301
+15;null;null;4;10;301
+16;null;null;4;11;301
+17;null;null;5;11;301
+18;null;null;5;3;301
+19;null;null;5;6;301
+20;null;null;5;9;301
+21;null;null;5;13;301
+22;null;null;5;12;301
+23;null;null;6;12;301
+24;null;null;6;11;301
+25;null;null;6;10;301
+26;null;null;6;9;301
+27;null;null;6;3;301
+28;null;null;6;4;301

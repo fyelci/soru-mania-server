@@ -1,0 +1,8 @@
+id;create_date;last_modified_date;type_id;question_id;comment_id;reporter_user_id
+1;null;null;500;5;null;3
+2;null;null;501;5;null;4
+3;null;null;500;5;null;5
+4;null;null;501;5;null;6
+5;null;null;500;5;null;7
+6;null;null;501;5;null;8
+7;null;null;501;5;null;10

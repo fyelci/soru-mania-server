@@ -1,0 +1,12 @@
+id;score;content_id;create_date;user_id;transaction_type_id;content_type_id
+1;5;5;null;3;600;401
+2;10;2;null;3;601;403
+3;5;3;null;3;600;401
+4;10;4;null;3;601;403
+5;5;1;null;3;600;401
+6;10;7;null;3;601;403
+7;5;8;null;3;600;401
+8;10;9;null;3;601;403
+9;5;10;null;3;600;401
+10;10;1;null;3;601;403
+11;5;12;null;3;600;401
