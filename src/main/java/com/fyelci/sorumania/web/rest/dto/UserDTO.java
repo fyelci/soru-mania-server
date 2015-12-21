@@ -3,6 +3,7 @@ package com.fyelci.sorumania.web.rest.dto;
 import com.fyelci.sorumania.domain.Authority;
 import com.fyelci.sorumania.domain.User;
 
+import com.fyelci.sorumania.util.SoruManiaUtil;
 import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.*;
@@ -45,6 +46,8 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    private String fullName;
+
     public UserDTO() {
     }
 
@@ -68,6 +71,7 @@ public class UserDTO {
         this.langKey = langKey;
         this.authorities = authorities;
         this.profileImageUrl = profileImageUrl;
+        this.fullName = SoruManiaUtil.getFullName(firstName, lastName, login);
     }
 
     public String getPassword() {
@@ -104,6 +108,14 @@ public class UserDTO {
 
     public Set<String> getAuthorities() {
         return authorities;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     @Override

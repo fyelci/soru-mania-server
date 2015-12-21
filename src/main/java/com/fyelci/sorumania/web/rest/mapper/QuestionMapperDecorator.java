@@ -3,6 +3,7 @@ package com.fyelci.sorumania.web.rest.mapper;
 import com.fyelci.sorumania.domain.Question;
 import com.fyelci.sorumania.util.DateUtil;
 import com.fyelci.sorumania.web.rest.dto.QuestionDTO;
+import com.fyelci.sorumania.web.rest.dto.UserDTO;
 import org.ocpsoft.prettytime.PrettyTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,6 +28,8 @@ public abstract class QuestionMapperDecorator implements  QuestionMapper{
             PrettyTime p = new PrettyTime(new Locale("tr"));
             dto.setReadableCreateDate(question.getCreateDate() != null ? p.format(DateUtil.toJavaUtilDateFromZonedDateTime(question.getCreateDate())) : "");
             dto.setReadableModifyDate(question.getLastModifiedDate() != null ? p.format(DateUtil.toJavaUtilDateFromZonedDateTime(question.getLastModifiedDate())) : "");
+
+            dto.setUser(new UserDTO(question.getUser()));
         }
 
         return dto;

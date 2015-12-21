@@ -1,6 +1,7 @@
 package com.fyelci.sorumania.web.rest.dto;
 
 import com.fyelci.sorumania.domain.Comment;
+import com.fyelci.sorumania.domain.User;
 
 import java.time.ZonedDateTime;
 import java.io.Serializable;
@@ -39,6 +40,8 @@ public class QuestionDTO implements Serializable {
     private Long userId;
 
     private String userLogin;
+
+    private UserDTO user;
 
     List<CommentDTO> commentList = new ArrayList<>();
 
@@ -173,13 +176,20 @@ public class QuestionDTO implements Serializable {
         this.readableCreateDate = readableCreateDate;
     }
 
-
     public String getReadableModifyDate() {
         return readableModifyDate;
     }
 
     public void setReadableModifyDate(String readableModifyDate) {
         this.readableModifyDate = readableModifyDate;
+    }
+
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 
     @Override

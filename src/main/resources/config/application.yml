@@ -46,14 +46,15 @@ jhipster:
         allow-credentials: true
         max-age: 1800
     mail:
-        from: SoruMania@localhost
+        from: SoruMania@gmail.com
     security:
         authentication:
             oauth:
                 clientid: SoruManiaapp
                 secret: mySecretOAuthSecret
-                # Token is valid 30 minutes
-                tokenValidityInSeconds: 1800
+                # Default was 1800 sec (30 min)
+                # Updated to 0 , we dont want it to expire
+                tokenValidityInSeconds: 3600000
         rememberme:
             # security key (this key should be unique for your application, and kept secret)
             key: cade0f0c9eb96b3a41b8761d6e7308c18ade1915

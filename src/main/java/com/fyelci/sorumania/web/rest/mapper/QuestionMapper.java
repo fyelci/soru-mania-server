@@ -23,6 +23,7 @@ public interface QuestionMapper {
     @Mapping(target = "commentList", ignore = true)
     @Mapping(target = "readableCreateDate", ignore = true)
     @Mapping(target = "readableModifyDate", ignore = true)
+    @Mapping(target = "user", ignore = true)
     QuestionDTO questionToQuestionDTO(Question question);
 
     @Mapping(source = "categoryId", target = "category")
