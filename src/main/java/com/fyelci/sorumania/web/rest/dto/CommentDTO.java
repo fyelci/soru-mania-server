@@ -36,6 +36,8 @@ public class CommentDTO implements Serializable {
     private String readableCreateDate;
     private String readableModifyDate;
 
+    private UserDTO user;
+
     public Long getId() {
         return id;
     }
@@ -138,6 +140,14 @@ public class CommentDTO implements Serializable {
 
     public void setReadableModifyDate(String readableModifyDate) {
         this.readableModifyDate = readableModifyDate;
+    }
+
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 
     @Override

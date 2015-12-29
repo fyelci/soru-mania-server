@@ -3,6 +3,8 @@ package com.fyelci.sorumania.web.rest;
 import com.fyelci.sorumania.Application;
 import com.fyelci.sorumania.domain.Question;
 import com.fyelci.sorumania.repository.QuestionRepository;
+import com.fyelci.sorumania.service.CommentService;
+import com.fyelci.sorumania.service.QuestionService;
 import com.fyelci.sorumania.web.rest.dto.QuestionDTO;
 import com.fyelci.sorumania.web.rest.mapper.QuestionMapper;
 
@@ -69,6 +71,9 @@ public class QuestionResourceIntTest {
     private QuestionRepository questionRepository;
 
     @Inject
+    private QuestionService questionService;
+
+    @Inject
     private QuestionMapper questionMapper;
 
     @Inject
@@ -87,6 +92,7 @@ public class QuestionResourceIntTest {
         QuestionResource questionResource = new QuestionResource();
         ReflectionTestUtils.setField(questionResource, "questionRepository", questionRepository);
         ReflectionTestUtils.setField(questionResource, "questionMapper", questionMapper);
+        ReflectionTestUtils.setField(questionResource, "questionService", questionService);
         this.restQuestionMockMvc = MockMvcBuilders.standaloneSetup(questionResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();

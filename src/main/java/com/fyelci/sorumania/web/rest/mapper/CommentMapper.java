@@ -19,6 +19,7 @@ public interface CommentMapper {
     @Mapping(source = "commentStatus.name", target = "commentStatusName")
     @Mapping(target = "readableCreateDate", ignore = true)
     @Mapping(target = "readableModifyDate", ignore = true)
+    @Mapping(target = "user", ignore = true)
     CommentDTO commentToCommentDTO(Comment comment);
 
     @Mapping(source = "questionId", target = "question")

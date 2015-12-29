@@ -33,6 +33,7 @@ public class QuestionService {
     @Inject
     private QuestionMapper questionMapper;
 
+    @Transactional(readOnly = true)
     public QuestionDTO getQuestion(Long id) {
         Question question = questionRepository.findOne(id);
         QuestionDTO questionDTO = questionMapper.questionToQuestionDTO(question);

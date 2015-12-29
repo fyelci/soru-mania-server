@@ -2,13 +2,13 @@ package com.fyelci.sorumania.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import java.time.ZonedDateTime;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -24,7 +24,8 @@ public class QuestionRating implements Serializable {
     private Long id;
 
     @NotNull
-    @Size(min = 1, max = 10)
+    @Min(1)
+    @Max(10)
     @Column(name = "rate", length = 10, nullable = false)
     private Integer rate;
 
@@ -42,7 +43,7 @@ public class QuestionRating implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-    
+
     public Long getId() {
         return id;
     }

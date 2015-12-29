@@ -29,7 +29,9 @@ public abstract class QuestionMapperDecorator implements  QuestionMapper{
             dto.setReadableCreateDate(question.getCreateDate() != null ? p.format(DateUtil.toJavaUtilDateFromZonedDateTime(question.getCreateDate())) : "");
             dto.setReadableModifyDate(question.getLastModifiedDate() != null ? p.format(DateUtil.toJavaUtilDateFromZonedDateTime(question.getLastModifiedDate())) : "");
 
-            dto.setUser(new UserDTO(question.getUser()));
+            if(question.getUser() != null) {
+                dto.setUser(new UserDTO(question.getUser()));
+            }
         }
 
         return dto;

@@ -5,6 +5,7 @@ import com.fyelci.sorumania.domain.Question;
 import com.fyelci.sorumania.util.DateUtil;
 import com.fyelci.sorumania.web.rest.dto.CommentDTO;
 import com.fyelci.sorumania.web.rest.dto.QuestionDTO;
+import com.fyelci.sorumania.web.rest.dto.UserDTO;
 import org.ocpsoft.prettytime.PrettyTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,6 +29,10 @@ public abstract class CommentMapperDecorator implements CommentMapper{
             PrettyTime p = new PrettyTime(new Locale("tr"));
             dto.setReadableCreateDate(comment.getCreateDate() != null ? p.format(DateUtil.toJavaUtilDateFromZonedDateTime(comment.getCreateDate())) : "");
             dto.setReadableModifyDate(comment.getLastModifiedDate() != null ? p.format(DateUtil.toJavaUtilDateFromZonedDateTime(comment.getLastModifiedDate())) : "");
+
+            if(comment.getUser() != null) {
+                dto.setUser(new UserDTO(comment.getUser()));
+            }
         }
 
         return dto;

@@ -43,14 +43,15 @@ public class UserServiceIntTest {
         Optional<User> maybeUser = userService.requestPasswordReset("john.doe@localhost");
         assertThat(maybeUser.isPresent()).isFalse();
 
-        maybeUser = userService.requestPasswordReset("admin@localhost");
+        maybeUser = userService.requestPasswordReset("fyelci@gmail.com");
         assertThat(maybeUser.isPresent()).isTrue();
 
-        assertThat(maybeUser.get().getEmail()).isEqualTo("admin@localhost");
+        assertThat(maybeUser.get().getEmail()).isEqualTo("fyelci@gmail.com");
         assertThat(maybeUser.get().getResetDate()).isNotNull();
         assertThat(maybeUser.get().getResetKey()).isNotNull();
     }
 
+    /* Tum kullanicilar aktif oldugu icin kapatildi.
     @Test
     public void assertThatOnlyActivatedUserCanRequestPasswordReset() {
         User user = userService.createUserInformation("johndoe", "johndoe", "John", "Doe", "john.doe@localhost", "en-US");
@@ -58,6 +59,7 @@ public class UserServiceIntTest {
         assertThat(maybeUser.isPresent()).isFalse();
         userRepository.delete(user);
     }
+    */
 
     @Test
     public void assertThatResetKeyMustNotBeOlderThan24Hours() {
