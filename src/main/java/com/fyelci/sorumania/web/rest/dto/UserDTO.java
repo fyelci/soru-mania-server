@@ -17,6 +17,8 @@ public class UserDTO {
     public static final int PASSWORD_MIN_LENGTH = 5;
     public static final int PASSWORD_MAX_LENGTH = 100;
 
+    private Long id;
+
     @Pattern(regexp = "^[a-z0-9]*$")
     @NotNull
     @Size(min = 1, max = 50)
@@ -52,16 +54,17 @@ public class UserDTO {
     }
 
     public UserDTO(User user) {
-        this(user.getLogin(), null, user.getFirstName(), user.getLastName(),
+        this(user.getId(), user.getLogin(), null, user.getFirstName(), user.getLastName(),
             user.getEmail(), user.getActivated(), user.getLangKey(),
             user.getAuthorities().stream().map(Authority::getName)
                 .collect(Collectors.toSet()),
             user.getProfileImageUrl());
     }
 
-    public UserDTO(String login, String password, String firstName, String lastName,
+    public UserDTO(Long id, String login, String password, String firstName, String lastName,
         String email, boolean activated, String langKey, Set<String> authorities, String profileImageUrl) {
 
+        this.id = id;
         this.login = login;
         this.password = password;
         this.firstName = firstName;
@@ -73,6 +76,15 @@ public class UserDTO {
         this.profileImageUrl = profileImageUrl;
         this.fullName = SoruManiaUtil.getFullName(firstName, lastName, login);
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 
     public String getPassword() {
         return password;
@@ -121,7 +133,8 @@ public class UserDTO {
     @Override
     public String toString() {
         return "UserDTO{" +
-            "login='" + login + '\'' +
+            "id='" + id + '\'' +
+            ", login='" + login + '\'' +
             ", password='" + password + '\'' +
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
