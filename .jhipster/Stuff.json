@@ -1,0 +1,22 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "branch",
+            "otherEntityName": "lov",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "nameSurname",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20151225133119",
+    "dto": "mapstruct",
+    "service": "no",
+    "pagination": "pagination"
+}
