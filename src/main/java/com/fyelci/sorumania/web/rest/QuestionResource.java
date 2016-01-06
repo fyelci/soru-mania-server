@@ -3,6 +3,8 @@ package com.fyelci.sorumania.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.fyelci.sorumania.domain.Question;
 import com.fyelci.sorumania.repository.QuestionRepository;
+import com.fyelci.sorumania.security.AuthoritiesConstants;
+import com.fyelci.sorumania.security.SecurityUtils;
 import com.fyelci.sorumania.service.QuestionService;
 import com.fyelci.sorumania.web.rest.util.HeaderUtil;
 import com.fyelci.sorumania.web.rest.util.PaginationUtil;
@@ -57,13 +59,13 @@ public class QuestionResource {
         if (questionDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("question", "idexists", "A new question cannot already have an ID")).body(null);
         }
-        Question question = questionMapper.questionDTOToQuestion(questionDTO);
-        question = questionRepository.save(question);
-        QuestionDTO result = questionMapper.questionToQuestionDTO(question);
+        QuestionDTO result = questionService.saveQuestion(questionDTO);
         return ResponseEntity.created(new URI("/api/questions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("question", result.getId().toString()))
             .body(result);
     }
+
+
 
     /**
      * PUT  /questions -> Updates an existing question.
@@ -77,9 +79,7 @@ public class QuestionResource {
         if (questionDTO.getId() == null) {
             return createQuestion(questionDTO);
         }
-        Question question = questionMapper.questionDTOToQuestion(questionDTO);
-        question = questionRepository.save(question);
-        QuestionDTO result = questionMapper.questionToQuestionDTO(question);
+        QuestionDTO result = questionService.saveQuestion(questionDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("question", questionDTO.getId().toString()))
             .body(result);
@@ -93,10 +93,13 @@ public class QuestionResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     @Transactional(readOnly = true)
-    public ResponseEntity<List<QuestionDTO>> getAllQuestions(Pageable pageable)
+    public ResponseEntity<List<QuestionDTO>> getAllQuestions(Pageable pageable,
+                                                             @RequestParam(required = false) Long categoryId,
+                                                             @RequestParam(required = false) Long lessonId,
+                                                             @RequestParam(required = false) Integer listType)
         throws URISyntaxException {
         log.debug("REST request to get a page of Questions");
-        Page<Question> page = questionRepository.findAll(pageable);
+        Page<Question> page = questionService.getAllQuestions(pageable, categoryId, lessonId, listType);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/questions");
         return new ResponseEntity<>(page.getContent().stream()
             .map(questionMapper::questionToQuestionDTO)
@@ -128,6 +131,9 @@ public class QuestionResource {
     @Timed
     public ResponseEntity<Void> deleteQuestion(@PathVariable Long id) {
         log.debug("REST request to delete Question : {}", id);
+        if (!SecurityUtils.getCurrentUser().getAuthorities().contains(AuthoritiesConstants.ADMIN)) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("question", "notAllowed", "You can not delete question")).body(null);
+        }
         questionRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("question", id.toString())).build();
     }

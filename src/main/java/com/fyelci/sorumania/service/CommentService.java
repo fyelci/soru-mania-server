@@ -1,10 +1,14 @@
 package com.fyelci.sorumania.service;
 
+import com.fyelci.sorumania.config.Constants;
 import com.fyelci.sorumania.domain.Comment;
 import com.fyelci.sorumania.domain.Question;
 import com.fyelci.sorumania.repository.CommentRepository;
+import com.fyelci.sorumania.repository.QuestionRepository;
 import com.fyelci.sorumania.web.rest.dto.CommentDTO;
+import com.fyelci.sorumania.web.rest.errors.CustomParameterizedException;
 import com.fyelci.sorumania.web.rest.mapper.CommentMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -13,9 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.time.ZonedDateTime;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -31,6 +35,9 @@ public class CommentService {
     private CommentRepository commentRepository;
 
     @Inject
+    private QuestionRepository questionRepository;
+
+    @Inject
     private CommentMapper commentMapper;
 
     /**
@@ -39,8 +46,29 @@ public class CommentService {
      */
     public CommentDTO save(CommentDTO commentDTO) {
         log.debug("Request to save Comment : {}", commentDTO);
+        if (commentDTO.getUserId() == null) {
+            throw new CustomParameterizedException("Cevap oluştururken kullanıcı boş olamaz");
+        } else if (StringUtils.isBlank(commentDTO.getMediaUrl()) && StringUtils.isBlank(commentDTO.getText())) {
+            throw new CustomParameterizedException("Cevap vermek icin aciklama ya da resim eklemeniz gerekir!");
+        }
+
+        if(commentDTO.getId() == null){
+            //Insert
+            commentDTO.setCreateDate(ZonedDateTime.now());
+            commentDTO.setLastModifiedDate(ZonedDateTime.now());
+            commentDTO.setCommentStatusId(Constants.CommentStatus.ACTIVE);
+        } else {
+            //Update
+            commentDTO.setLastModifiedDate(ZonedDateTime.now());
+        }
         Comment comment = commentMapper.commentDTOToComment(commentDTO);
         comment = commentRepository.save(comment);
+
+        //Update comment count
+        Long commentCount = commentRepository.countQuestionComment(comment.getQuestion().getId());
+        Question question = questionRepository.findOne(comment.getQuestion().getId());
+        question.setCommentCount(commentCount.intValue());
+
         CommentDTO result = commentMapper.commentToCommentDTO(comment);
         return result;
     }
@@ -64,7 +92,7 @@ public class CommentService {
     @Transactional(readOnly = true)
     public List<CommentDTO> findQuestionComments(Question q) {
         log.debug("Getting Question Comments");
-        List<Comment> result = commentRepository.findByQuestion(q);
+        List<Comment> result = commentRepository.findByQuestionOrderByCreateDateDesc(q);
         return result.stream()
             .map(commentMapper::commentToCommentDTO)
             .collect(Collectors.toCollection(LinkedList::new));

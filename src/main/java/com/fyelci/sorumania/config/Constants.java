@@ -21,5 +21,16 @@ public final class Constants {
     private Constants() {
     }
 
+    public class QuestionStatus {
+        public static final long ACTIVE     = 200L;
+        public static final long DELETED    = 201L;
+        public static final long REPORTED   = 202L;
+    }
+
+    public class CommentStatus {
+        public static final long ACTIVE     = 700L;
+        public static final long DELETED    = 701L;
+    }
+
 
 }

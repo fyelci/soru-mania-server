@@ -379,6 +379,7 @@
         <!-- jhipster-needle-maven-add-dependency -->
     </dependencies>
     <build>
+        <finalName>soru-mania</finalName>
         <defaultGoal>spring-boot:run</defaultGoal>
         <resources>
             <resource>
