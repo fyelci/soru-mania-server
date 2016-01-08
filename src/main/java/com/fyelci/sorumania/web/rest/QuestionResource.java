@@ -18,6 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -131,7 +132,7 @@ public class QuestionResource {
     @Timed
     public ResponseEntity<Void> deleteQuestion(@PathVariable Long id) {
         log.debug("REST request to delete Question : {}", id);
-        if (!SecurityUtils.getCurrentUser().getAuthorities().contains(AuthoritiesConstants.ADMIN)) {
+        if (!SecurityUtils.getCurrentUser().getAuthorities().contains(new SimpleGrantedAuthority(AuthoritiesConstants.ADMIN))) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("question", "notAllowed", "You can not delete question")).body(null);
         }
         questionRepository.delete(id);

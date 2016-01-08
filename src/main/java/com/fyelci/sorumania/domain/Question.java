@@ -2,9 +2,14 @@ package com.fyelci.sorumania.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -52,6 +57,12 @@ public class Question implements Serializable {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Column(name = "rate_count")
+    private Integer rateCount;
+
+    @Column(name = "rate_avg", precision=5, scale=2)
+    private BigDecimal rateAvg;
 
     public Long getId() {
         return id;
@@ -131,6 +142,22 @@ public class Question implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Integer getRateCount() {
+        return rateCount;
+    }
+
+    public void setRateCount(Integer rateCount) {
+        this.rateCount = rateCount;
+    }
+
+    public BigDecimal getRateAvg() {
+        return rateAvg;
+    }
+
+    public void setRateAvg(BigDecimal rateAvg) {
+        this.rateAvg = rateAvg;
     }
 
     @Override

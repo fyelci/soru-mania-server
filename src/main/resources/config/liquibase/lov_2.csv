@@ -1,0 +1,16 @@
+id;type;name;status;sequence;description;int_param1;str_param1
+350;USER_TYPE;Öğrenci;true;10;;null;
+351;USER_TYPE;Öğretmen;true;20;;null;
+
+
+250;USER_GRADUATE_STATUS;Ortaokul Öğrencisi;true;10;;null;
+251;USER_GRADUATE_STATUS;Lise Öğrencisi;true;20;;null;
+252;USER_GRADUATE_STATUS;Lise Mezunu;true;30;;null;
+253;USER_GRADUATE_STATUS;Üniversite Öğrencisi;true;40;;null;
+254;USER_GRADUATE_STATUS;Üniversite Mezunu;true;50;;null;
+255;USER_GRADUATE_STATUS;Atama Bekliyor;true;60;;null;
+256;USER_GRADUATE_STATUS;Öğretmen;true;70;;null;
+
+
+1004;MANAGABLE_TYPES;USER_TYPE;true;50;Kullanıcı Tipi;null;
+1005;MANAGABLE_TYPES;USER_GRADUATE_STATUS;true;60;Kullanıcı Mezuniyet Durumu;null;

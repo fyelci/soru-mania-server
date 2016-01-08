@@ -3,6 +3,7 @@ package com.fyelci.sorumania.service;
 import com.fyelci.sorumania.config.Constants;
 import com.fyelci.sorumania.domain.Comment;
 import com.fyelci.sorumania.domain.Question;
+import com.fyelci.sorumania.domain.User;
 import com.fyelci.sorumania.repository.CommentRepository;
 import com.fyelci.sorumania.repository.QuestionRepository;
 import com.fyelci.sorumania.security.AuthoritiesConstants;
@@ -15,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,6 +43,9 @@ public class QuestionService {
     @Inject
     private QuestionMapper questionMapper;
 
+    @Inject
+    private ScoreService scoreService;
+
     public QuestionDTO saveQuestion(QuestionDTO questionDTO) {
         if (questionDTO.getUserId() == null) {
             throw new CustomParameterizedException("Soru oluştururken kullanıcı boş olamaz");
@@ -52,8 +57,10 @@ public class QuestionService {
             throw new CustomParameterizedException("Soru oluştururken resim yüklemek zorunludur!");
         }
 
+        boolean isInsert = false;
         if(questionDTO.getId() == null){
             //Insert
+            isInsert = true;
             questionDTO.setCreateDate(ZonedDateTime.now());
             questionDTO.setLastModifiedDate(ZonedDateTime.now());
             questionDTO.setCommentCount(0);
@@ -61,7 +68,7 @@ public class QuestionService {
         } else {
             //Update
             //Kullanıcının soruyu guncellemeye yetkisi var mı bak
-            if (!SecurityUtils.getCurrentUser().getAuthorities().contains(AuthoritiesConstants.ADMIN)) {
+            if (!SecurityUtils.getCurrentUser().getAuthorities().contains(new SimpleGrantedAuthority(AuthoritiesConstants.ADMIN))) {
                 Question currentQuestion = questionRepository.findOne(questionDTO.getId());
                 if (currentQuestion.getUser().getId().longValue() != questionDTO.getUserId().longValue()) {
                     throw new CustomParameterizedException("Bu soruyu siz olusturmadiginiz icin guncelleyemezsiniz!");
@@ -72,6 +79,12 @@ public class QuestionService {
         }
         Question question = questionMapper.questionDTOToQuestion(questionDTO);
         question = questionRepository.save(question);
+
+        //Kullanciciya soru sordugu icin puan ver.
+        if (isInsert) {
+            scoreService.addScoreToUser(question.getUser(), question.getId(), Constants.ContentTypes.QUESTION, Constants.ScoreTypes.ASK_QUESTION);
+        }
+
         return questionMapper.questionToQuestionDTO(question);
     }
 

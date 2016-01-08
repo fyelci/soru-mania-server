@@ -1,6 +1,7 @@
 package com.fyelci.sorumania.web.rest.dto;
 
 import com.fyelci.sorumania.domain.Authority;
+import com.fyelci.sorumania.domain.Lov;
 import com.fyelci.sorumania.domain.User;
 
 import com.fyelci.sorumania.util.SoruManiaUtil;
@@ -50,6 +51,22 @@ public class UserDTO {
 
     private String fullName;
 
+    private Long totalScore;
+
+    private Long userTypeId;
+
+    private String userTypeName;
+
+    private Long preparingForId;
+
+    private String preparingForName;
+
+    private String userTarget;
+
+    private Long userGraduateStatusId;
+
+    private String userGraduateStatusName;
+
     public UserDTO() {
     }
 
@@ -58,11 +75,21 @@ public class UserDTO {
             user.getEmail(), user.getActivated(), user.getLangKey(),
             user.getAuthorities().stream().map(Authority::getName)
                 .collect(Collectors.toSet()),
-            user.getProfileImageUrl());
+            user.getProfileImageUrl(),
+            user.getTotalScore(),
+            user.getUserType() == null ? null : user.getUserType().getId(),
+            user.getUserType() == null ? null : user.getUserType().getName(),
+            user.getPreparingFor() == null ? null : user.getPreparingFor().getId(),
+            user.getPreparingFor() == null ? null : user.getPreparingFor().getName(),
+            user.getUserTarget(),
+            user.getUserGraduateStatus() == null ? null : user.getUserGraduateStatus().getId(),
+            user.getUserGraduateStatus() == null ? null : user.getUserGraduateStatus().getName());
     }
 
     public UserDTO(Long id, String login, String password, String firstName, String lastName,
-        String email, boolean activated, String langKey, Set<String> authorities, String profileImageUrl) {
+        String email, boolean activated, String langKey, Set<String> authorities, String profileImageUrl,
+                   Long totalScore, Long userTypeId, String userTypeName, Long preparingForId, String preparingForName,
+                   String userTarget, Long userGraduateStatusId, String userGraduateStatusName) {
 
         this.id = id;
         this.login = login;
@@ -75,6 +102,14 @@ public class UserDTO {
         this.authorities = authorities;
         this.profileImageUrl = profileImageUrl;
         this.fullName = SoruManiaUtil.getFullName(firstName, lastName, login);
+        this.totalScore = totalScore;
+        this.userTypeId = userTypeId;
+        this.userTypeName = userTypeName;
+        this.preparingForId = preparingForId;
+        this.preparingForName = preparingForName;
+        this.userTarget = userTarget;
+        this.userGraduateStatusId = userGraduateStatusId;
+        this.userGraduateStatusName = userGraduateStatusName;
     }
 
     public Long getId() {
@@ -128,6 +163,38 @@ public class UserDTO {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public Long getTotalScore() {
+        return totalScore;
+    }
+
+    public Long getUserTypeId() {
+        return userTypeId;
+    }
+
+    public String getUserTypeName() {
+        return userTypeName;
+    }
+
+    public Long getPreparingForId() {
+        return preparingForId;
+    }
+
+    public String getPreparingForName() {
+        return preparingForName;
+    }
+
+    public String getUserTarget() {
+        return userTarget;
+    }
+
+    public Long getUserGraduateStatusId() {
+        return userGraduateStatusId;
+    }
+
+    public String getUserGraduateStatusName() {
+        return userGraduateStatusName;
     }
 
     @Override

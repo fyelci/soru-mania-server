@@ -83,6 +83,25 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Authority> authorities = new HashSet<>();
 
+    @Column(name = "total_score")
+    private Long totalScore;
+
+    @ManyToOne
+    @JoinColumn(name = "user_type_id")
+    private Lov userType;
+
+    @ManyToOne
+    @JoinColumn(name = "preparing_for")
+    private Lov preparingFor;
+
+    @Column(name = "user_target", length = 255)
+    private String userTarget;
+
+    @ManyToOne
+    @JoinColumn(name = "user_graduate_status")
+    private Lov userGraduateStatus;
+
+
     public Long getId() {
         return id;
     }
@@ -185,6 +204,46 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public Long getTotalScore() {
+        return totalScore;
+    }
+
+    public void setTotalScore(Long totalScore) {
+        this.totalScore = totalScore;
+    }
+
+    public Lov getUserType() {
+        return userType;
+    }
+
+    public void setUserType(Lov userType) {
+        this.userType = userType;
+    }
+
+    public Lov getPreparingFor() {
+        return preparingFor;
+    }
+
+    public void setPreparingFor(Lov preparingFor) {
+        this.preparingFor = preparingFor;
+    }
+
+    public String getUserTarget() {
+        return userTarget;
+    }
+
+    public void setUserTarget(String userTarget) {
+        this.userTarget = userTarget;
+    }
+
+    public Lov getUserGraduateStatus() {
+        return userGraduateStatus;
+    }
+
+    public void setUserGraduateStatus(Lov userGraduateStatus) {
+        this.userGraduateStatus = userGraduateStatus;
     }
 
     @Override

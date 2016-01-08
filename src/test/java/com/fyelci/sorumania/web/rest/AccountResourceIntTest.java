@@ -153,7 +153,15 @@ public class AccountResourceIntTest {
             true,                   // activated
             "en",                   // langKey
             new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
-            "http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png"                      // profileImageUrl
+            "http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png",                      // profileImageUrl
+            0L,
+            350L,
+            "Öğrenci",
+            3L,
+            "YGS",
+            "Ankara Üniversitesi PDR",
+            251L,
+            "Üniversite Öğrencisi"
         );
 
         restMvc.perform(
@@ -179,7 +187,15 @@ public class AccountResourceIntTest {
             true,                   // activated
             "en",                   // langKey
             new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
-            "http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png"
+            "http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png",
+            0L,
+            350L,
+            "Öğrenci",
+            3L,
+            "YGS",
+            "Ankara Üniversitesi PDR",
+            251L,
+            "Üniversite Öğrencisi"
         );
 
         restUserMockMvc.perform(
@@ -205,7 +221,15 @@ public class AccountResourceIntTest {
             true,               // activated
             "en",               // langKey
             new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
-            "http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png"
+            "http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png",
+            0L,
+            350L,
+            "Öğrenci",
+            3L,
+            "YGS",
+            "Ankara Üniversitesi PDR",
+            251L,
+            "Üniversite Öğrencisi"
         );
 
         restUserMockMvc.perform(
@@ -232,12 +256,23 @@ public class AccountResourceIntTest {
             true,                   // activated
             "en",                   // langKey
             new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
-            "http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png"
+            "http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png",
+            0L,
+            350L,
+            "Öğrenci",
+            3L,
+            "YGS",
+            "Ankara Üniversitesi PDR",
+            251L,
+            "Üniversite Öğrencisi"
         );
 
         // Duplicate login, different e-mail
         UserDTO dup = new UserDTO(null, u.getLogin(), u.getPassword(), u.getLogin(), u.getLastName(),
-            "alicejr@example.com", true, u.getLangKey(), u.getAuthorities(), u.getProfileImageUrl());
+            "alicejr@example.com", true, u.getLangKey(), u.getAuthorities(), u.getProfileImageUrl(),
+            u.getTotalScore(), u.getUserTypeId(), u.getUserTypeName(),
+            u.getPreparingForId(), u.getPreparingForName(),
+            u.getUserTarget(), u.getUserGraduateStatusId(), u.getUserGraduateStatusName());
 
         // Good user
         restMvc.perform(
@@ -271,12 +306,23 @@ public class AccountResourceIntTest {
             true,                   // activated
             "en",                   // langKey
             new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
-            "http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png"
+            "http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png",
+            0L,
+            350L,
+            "Öğrenci",
+            3L,
+            "YGS",
+            "Ankara Üniversitesi PDR",
+            251L,
+            "Üniversite Öğrencisi"
         );
 
         // Duplicate e-mail, different login
         UserDTO dup = new UserDTO(null, "johnjr", u.getPassword(), u.getLogin(), u.getLastName(),
-            u.getEmail(), true, u.getLangKey(), u.getAuthorities(), u.getProfileImageUrl());
+            u.getEmail(), true, u.getLangKey(), u.getAuthorities(), u.getProfileImageUrl(),
+            u.getTotalScore(), u.getUserTypeId(), u.getUserTypeName(),
+            u.getPreparingForId(), u.getPreparingForName(),
+            u.getUserTarget(), u.getUserGraduateStatusId(), u.getUserGraduateStatusName());
 
         // Good user
         restMvc.perform(
@@ -309,7 +355,15 @@ public class AccountResourceIntTest {
             true,                   // activated
             "en",                   // langKey
             new HashSet<>(Arrays.asList(AuthoritiesConstants.ADMIN)), // <-- only admin should be able to do that
-            "http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png"
+            "http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png",
+            0L,
+            350L,
+            "Öğrenci",
+            3L,
+            "YGS",
+            "Ankara Üniversitesi PDR",
+            251L,
+            "Üniversite Öğrencisi"
         );
 
         restMvc.perform(

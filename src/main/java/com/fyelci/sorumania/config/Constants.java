@@ -21,6 +21,13 @@ public final class Constants {
     private Constants() {
     }
 
+    public class ContentTypes {
+        public static final long CATEGORY  = 400L;
+        public static final long QUESTION  = 401L;
+        public static final long LESSON    = 402L;
+        public static final long COMMENT   = 403L;
+    }
+
     public class QuestionStatus {
         public static final long ACTIVE     = 200L;
         public static final long DELETED    = 201L;
@@ -30,6 +37,11 @@ public final class Constants {
     public class CommentStatus {
         public static final long ACTIVE     = 700L;
         public static final long DELETED    = 701L;
+    }
+
+    public class ScoreTypes {
+        public static final long ASK_QUESTION   = 600L;
+        public static final long COMMENT        = 601L;
     }
 
 

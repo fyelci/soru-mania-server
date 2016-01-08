@@ -40,6 +40,9 @@ public class CommentService {
     @Inject
     private CommentMapper commentMapper;
 
+    @Inject
+    private ScoreService scoreService;
+
     /**
      * Save a comment.
      * @return the persisted entity
@@ -68,6 +71,10 @@ public class CommentService {
         Long commentCount = commentRepository.countQuestionComment(comment.getQuestion().getId());
         Question question = questionRepository.findOne(comment.getQuestion().getId());
         question.setCommentCount(commentCount.intValue());
+        questionRepository.save(question);
+
+        //Kullaniciya yaptigi islem icin paun ver
+        scoreService.addScoreToUser(comment.getUser(), comment.getId(), Constants.ContentTypes.COMMENT, Constants.ScoreTypes.COMMENT);
 
         CommentDTO result = commentMapper.commentToCommentDTO(comment);
         return result;

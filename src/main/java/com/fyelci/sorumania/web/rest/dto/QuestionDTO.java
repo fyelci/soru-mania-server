@@ -3,6 +3,7 @@ package com.fyelci.sorumania.web.rest.dto;
 import com.fyelci.sorumania.domain.Comment;
 import com.fyelci.sorumania.domain.User;
 
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.io.Serializable;
 import java.util.*;
@@ -47,6 +48,10 @@ public class QuestionDTO implements Serializable {
 
     private String readableCreateDate;
     private String readableModifyDate;
+
+    private Integer rateCount;
+
+    private BigDecimal rateAvg;
 
     public Long getId() {
         return id;
@@ -190,6 +195,22 @@ public class QuestionDTO implements Serializable {
 
     public void setUser(UserDTO user) {
         this.user = user;
+    }
+
+    public Integer getRateCount() {
+        return rateCount;
+    }
+
+    public void setRateCount(Integer rateCount) {
+        this.rateCount = rateCount;
+    }
+
+    public BigDecimal getRateAvg() {
+        return rateAvg;
+    }
+
+    public void setRateAvg(BigDecimal rateAvg) {
+        this.rateAvg = rateAvg;
     }
 
     @Override

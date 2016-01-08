@@ -25,7 +25,7 @@ public class QuestionRating implements Serializable {
 
     @NotNull
     @Min(1)
-    @Max(10)
+    @Max(5)
     @Column(name = "rate", length = 10, nullable = false)
     private Integer rate;
 

@@ -2,7 +2,11 @@ package com.fyelci.sorumania.web.rest;
 
 import com.fyelci.sorumania.Application;
 import com.fyelci.sorumania.domain.Comment;
+import com.fyelci.sorumania.domain.Question;
+import com.fyelci.sorumania.domain.User;
 import com.fyelci.sorumania.repository.CommentRepository;
+import com.fyelci.sorumania.repository.QuestionRepository;
+import com.fyelci.sorumania.repository.UserRepository;
 import com.fyelci.sorumania.service.CommentService;
 import com.fyelci.sorumania.web.rest.dto.CommentDTO;
 import com.fyelci.sorumania.web.rest.mapper.CommentMapper;
@@ -66,11 +70,19 @@ public class CommentResourceIntTest {
     private static final Long DEFAULT_PARENT_ID = 1L;
     private static final Long UPDATED_PARENT_ID = 2L;
 
+    private static final Long DEFAULT_USER_ID = 3L;
+
     @Inject
     private CommentRepository commentRepository;
 
     @Inject
     private CommentMapper commentMapper;
+
+    @Inject
+    private UserRepository userRepository;
+
+    @Inject
+    private QuestionRepository questionRepository;
 
     @Inject
     private CommentService commentService;
@@ -104,6 +116,8 @@ public class CommentResourceIntTest {
         comment.setCreateDate(DEFAULT_CREATE_DATE);
         comment.setLastModifiedDate(DEFAULT_LAST_MODIFIED_DATE);
         comment.setParentId(DEFAULT_PARENT_ID);
+        comment.setQuestion(questionRepository.findOne(1L));
+        comment.setUser(userRepository.findOneById(3L).get());
     }
 
     @Test
@@ -125,8 +139,7 @@ public class CommentResourceIntTest {
         Comment testComment = comments.get(comments.size() - 1);
         assertThat(testComment.getText()).isEqualTo(DEFAULT_TEXT);
         assertThat(testComment.getMediaUrl()).isEqualTo(DEFAULT_MEDIA_URL);
-        assertThat(testComment.getCreateDate()).isEqualTo(DEFAULT_CREATE_DATE);
-        assertThat(testComment.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
+        assertThat(testComment.getCreateDate()).isNotNull();
         assertThat(testComment.getParentId()).isEqualTo(DEFAULT_PARENT_ID);
     }
 
@@ -201,8 +214,8 @@ public class CommentResourceIntTest {
         Comment testComment = comments.get(comments.size() - 1);
         assertThat(testComment.getText()).isEqualTo(UPDATED_TEXT);
         assertThat(testComment.getMediaUrl()).isEqualTo(UPDATED_MEDIA_URL);
-        assertThat(testComment.getCreateDate()).isEqualTo(UPDATED_CREATE_DATE);
-        assertThat(testComment.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testComment.getCreateDate()).isNotNull();
+        assertThat(testComment.getLastModifiedDate()).isNotNull();
         assertThat(testComment.getParentId()).isEqualTo(UPDATED_PARENT_ID);
     }
 
