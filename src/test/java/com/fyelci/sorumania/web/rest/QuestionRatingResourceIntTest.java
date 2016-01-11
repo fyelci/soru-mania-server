@@ -3,6 +3,9 @@ package com.fyelci.sorumania.web.rest;
 import com.fyelci.sorumania.Application;
 import com.fyelci.sorumania.domain.QuestionRating;
 import com.fyelci.sorumania.repository.QuestionRatingRepository;
+import com.fyelci.sorumania.service.QuestionRatingService;
+import com.fyelci.sorumania.web.rest.dto.QuestionRatingDTO;
+import com.fyelci.sorumania.web.rest.mapper.QuestionRatingMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -63,6 +66,12 @@ public class QuestionRatingResourceIntTest {
     private QuestionRatingRepository questionRatingRepository;
 
     @Inject
+    private QuestionRatingMapper questionRatingMapper;
+
+    @Inject
+    private QuestionRatingService questionRatingService;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -76,7 +85,8 @@ public class QuestionRatingResourceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         QuestionRatingResource questionRatingResource = new QuestionRatingResource();
-        ReflectionTestUtils.setField(questionRatingResource, "questionRatingRepository", questionRatingRepository);
+        ReflectionTestUtils.setField(questionRatingResource, "questionRatingService", questionRatingService);
+        ReflectionTestUtils.setField(questionRatingResource, "questionRatingMapper", questionRatingMapper);
         this.restQuestionRatingMockMvc = MockMvcBuilders.standaloneSetup(questionRatingResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -96,10 +106,11 @@ public class QuestionRatingResourceIntTest {
         int databaseSizeBeforeCreate = questionRatingRepository.findAll().size();
 
         // Create the QuestionRating
+        QuestionRatingDTO questionRatingDTO = questionRatingMapper.questionRatingToQuestionRatingDTO(questionRating);
 
         restQuestionRatingMockMvc.perform(post("/api/questionRatings")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(questionRating)))
+                .content(TestUtil.convertObjectToJsonBytes(questionRatingDTO)))
                 .andExpect(status().isCreated());
 
         // Validate the QuestionRating in the database
@@ -119,10 +130,11 @@ public class QuestionRatingResourceIntTest {
         questionRating.setRate(null);
 
         // Create the QuestionRating, which fails.
+        QuestionRatingDTO questionRatingDTO = questionRatingMapper.questionRatingToQuestionRatingDTO(questionRating);
 
         restQuestionRatingMockMvc.perform(post("/api/questionRatings")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(questionRating)))
+                .content(TestUtil.convertObjectToJsonBytes(questionRatingDTO)))
                 .andExpect(status().isBadRequest());
 
         List<QuestionRating> questionRatings = questionRatingRepository.findAll();
@@ -181,10 +193,11 @@ public class QuestionRatingResourceIntTest {
         questionRating.setRate(UPDATED_RATE);
         questionRating.setCreateDate(UPDATED_CREATE_DATE);
         questionRating.setLastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
+        QuestionRatingDTO questionRatingDTO = questionRatingMapper.questionRatingToQuestionRatingDTO(questionRating);
 
         restQuestionRatingMockMvc.perform(put("/api/questionRatings")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(questionRating)))
+                .content(TestUtil.convertObjectToJsonBytes(questionRatingDTO)))
                 .andExpect(status().isOk());
 
         // Validate the QuestionRating in the database

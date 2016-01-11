@@ -61,7 +61,7 @@ public class Question implements Serializable {
     @Column(name = "rate_count")
     private Integer rateCount;
 
-    @Column(name = "rate_avg", precision=5, scale=2)
+    @Column(name = "rate_avg", precision=5, scale=1)
     private BigDecimal rateAvg;
 
     public Long getId() {

@@ -53,6 +53,9 @@ public class QuestionDTO implements Serializable {
 
     private BigDecimal rateAvg;
 
+    //Bir kullanicinin kac puan verdigi tutulur
+    private Integer userRate;
+
     public Long getId() {
         return id;
     }
@@ -211,6 +214,14 @@ public class QuestionDTO implements Serializable {
 
     public void setRateAvg(BigDecimal rateAvg) {
         this.rateAvg = rateAvg;
+    }
+
+    public Integer getUserRate() {
+        return userRate;
+    }
+
+    public void setUserRate(Integer userRate) {
+        this.userRate = userRate;
     }
 
     @Override

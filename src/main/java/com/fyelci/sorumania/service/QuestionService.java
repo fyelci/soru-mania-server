@@ -3,6 +3,7 @@ package com.fyelci.sorumania.service;
 import com.fyelci.sorumania.config.Constants;
 import com.fyelci.sorumania.domain.Comment;
 import com.fyelci.sorumania.domain.Question;
+import com.fyelci.sorumania.domain.QuestionRating;
 import com.fyelci.sorumania.domain.User;
 import com.fyelci.sorumania.repository.CommentRepository;
 import com.fyelci.sorumania.repository.QuestionRepository;
@@ -10,6 +11,7 @@ import com.fyelci.sorumania.security.AuthoritiesConstants;
 import com.fyelci.sorumania.security.SecurityUtils;
 import com.fyelci.sorumania.web.rest.dto.CommentDTO;
 import com.fyelci.sorumania.web.rest.dto.QuestionDTO;
+import com.fyelci.sorumania.web.rest.dto.QuestionRatingDTO;
 import com.fyelci.sorumania.web.rest.errors.CustomParameterizedException;
 import com.fyelci.sorumania.web.rest.mapper.QuestionMapper;
 import org.slf4j.Logger;
@@ -42,6 +44,10 @@ public class QuestionService {
 
     @Inject
     private QuestionMapper questionMapper;
+
+    @Inject
+    private QuestionRatingService questionRatingService;
+
 
     @Inject
     private ScoreService scoreService;
@@ -97,6 +103,9 @@ public class QuestionService {
             List<CommentDTO> commentList = commentService.findQuestionComments(question);
             questionDTO.setCommentList(commentList);
         }
+
+        //Kullanıcı bu soru için oy vermişse onu getir.
+        questionDTO.setUserRate(questionRatingService.getUserQuestionRating(id));
 
         return questionDTO;
     }

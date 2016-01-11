@@ -1,48 +1,34 @@
-package com.fyelci.sorumania.domain;
+package com.fyelci.sorumania.web.rest.dto;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import javax.validation.constraints.*;
+import java.io.Serializable;
 import java.util.Objects;
 
-/**
- * A QuestionRating.
- */
-@Entity
-@Table(name = "question_rating")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class QuestionRating implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+/**
+ * A DTO for the QuestionRating entity.
+ */
+public class QuestionRatingDTO implements Serializable {
+
     private Long id;
 
     @NotNull
-    @Min(1)
-    @Max(5)
-    @Column(name = "rate", nullable = false)
     private Integer rate;
 
-    @Column(name = "create_date")
     private ZonedDateTime createDate;
 
-    @Column(name = "last_modified_date")
     private ZonedDateTime lastModifiedDate;
 
-    @ManyToOne
-    @JoinColumn(name = "question_id")
-    private Question question;
+    private Long questionId;
+    private Long userId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    private String userLogin;
 
+    private Integer rateCount;
+
+    private BigDecimal rateAvg;
 
     public Long getId() {
         return id;
@@ -76,20 +62,43 @@ public class QuestionRating implements Serializable {
         this.lastModifiedDate = lastModifiedDate;
     }
 
-    public Question getQuestion() {
-        return question;
+    public Long getQuestionId() {
+        return questionId;
     }
 
-    public void setQuestion(Question question) {
-        this.question = question;
+    public void setQuestionId(Long questionId) {
+        this.questionId = questionId;
+    }
+    public Long getUserId() {
+        return userId;
     }
 
-    public User getUser() {
-        return user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
+    }
+
+    public Integer getRateCount() {
+        return rateCount;
+    }
+
+    public void setRateCount(Integer rateCount) {
+        this.rateCount = rateCount;
+    }
+
+    public BigDecimal getRateAvg() {
+        return rateAvg;
+    }
+
+    public void setRateAvg(BigDecimal rateAvg) {
+        this.rateAvg = rateAvg;
     }
 
     @Override
@@ -100,8 +109,12 @@ public class QuestionRating implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        QuestionRating questionRating = (QuestionRating) o;
-        return Objects.equals(id, questionRating.id);
+
+        QuestionRatingDTO questionRatingDTO = (QuestionRatingDTO) o;
+
+        if ( ! Objects.equals(id, questionRatingDTO.id)) return false;
+
+        return true;
     }
 
     @Override
@@ -111,7 +124,7 @@ public class QuestionRating implements Serializable {
 
     @Override
     public String toString() {
-        return "QuestionRating{" +
+        return "QuestionRatingDTO{" +
             "id=" + id +
             ", rate='" + rate + "'" +
             ", createDate='" + createDate + "'" +

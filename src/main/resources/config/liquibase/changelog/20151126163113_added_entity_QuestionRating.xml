@@ -33,7 +33,7 @@
 
         <dropDefaultValue tableName="question_rating" columnName="last_modified_date" columnDataType="datetime"/>
 
-        
+
         <addForeignKeyConstraint baseColumnNames="question_id"
                                  baseTableName="question_rating"
                                  constraintName="fk_questionrating_question_id"
