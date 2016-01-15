@@ -2,6 +2,7 @@ package com.fyelci.sorumania.service;
 
 import com.fyelci.sorumania.config.Constants;
 import com.fyelci.sorumania.domain.Comment;
+import com.fyelci.sorumania.domain.Lov;
 import com.fyelci.sorumania.domain.Question;
 import com.fyelci.sorumania.repository.CommentRepository;
 import com.fyelci.sorumania.repository.QuestionRepository;
@@ -43,6 +44,9 @@ public class CommentService {
     @Inject
     private ScoreService scoreService;
 
+    @Inject
+    private LovService lovService;
+
     /**
      * Save a comment.
      * @return the persisted entity
@@ -78,6 +82,12 @@ public class CommentService {
 
         CommentDTO result = commentMapper.commentToCommentDTO(comment);
         return result;
+    }
+
+    public void deactivateReportedComment(Comment comment) {
+        Lov deavtiveStatus = lovService.getLovById(Constants.CommentStatus.DELETED);
+        comment.setCommentStatus(deavtiveStatus);
+        commentRepository.save(comment);
     }
 
     /**

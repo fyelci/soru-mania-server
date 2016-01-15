@@ -44,5 +44,10 @@ public final class Constants {
         public static final long COMMENT        = 601L;
     }
 
+    public class ReportedContentLimits {
+        public static final long QUESTION  = 2L;
+        public static final long COMMENT   = 2L;
+    }
+
 
 }

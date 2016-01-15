@@ -1,10 +1,7 @@
 package com.fyelci.sorumania.service;
 
 import com.fyelci.sorumania.config.Constants;
-import com.fyelci.sorumania.domain.Comment;
-import com.fyelci.sorumania.domain.Question;
-import com.fyelci.sorumania.domain.QuestionRating;
-import com.fyelci.sorumania.domain.User;
+import com.fyelci.sorumania.domain.*;
 import com.fyelci.sorumania.repository.CommentRepository;
 import com.fyelci.sorumania.repository.QuestionRepository;
 import com.fyelci.sorumania.security.AuthoritiesConstants;
@@ -48,6 +45,9 @@ public class QuestionService {
     @Inject
     private QuestionRatingService questionRatingService;
 
+
+    @Inject
+    private LovService lovService;
 
     @Inject
     private ScoreService scoreService;
@@ -94,6 +94,12 @@ public class QuestionService {
         return questionMapper.questionToQuestionDTO(question);
     }
 
+    public void deactivateReportedQuestion(Question question) {
+        Lov deavtiveStatus = lovService.getLovById(Constants.QuestionStatus.REPORTED);
+        question.setQuestionStatus(deavtiveStatus);
+        questionRepository.save(question);
+    }
+
     @Transactional(readOnly = true)
     public QuestionDTO getQuestion(Long id) {
         Question question = questionRepository.findOne(id);
@@ -127,7 +133,7 @@ public class QuestionService {
             && listType == null) {
             page = questionRepository.listByCategoryAndLesson(categoryId, lessonId, pageable);
         } else {
-            page = questionRepository.findAll(pageable);
+            page = questionRepository.listAll(pageable);
         }
 
         return page;

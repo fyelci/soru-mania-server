@@ -3,6 +3,7 @@ package com.fyelci.sorumania.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.fyelci.sorumania.domain.ReportedContent;
 import com.fyelci.sorumania.repository.ReportedContentRepository;
+import com.fyelci.sorumania.service.ReportedContentService;
 import com.fyelci.sorumania.web.rest.util.HeaderUtil;
 import com.fyelci.sorumania.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -29,10 +30,13 @@ import java.util.Optional;
 public class ReportedContentResource {
 
     private final Logger log = LoggerFactory.getLogger(ReportedContentResource.class);
-        
+
     @Inject
     private ReportedContentRepository reportedContentRepository;
-    
+
+    @Inject
+    private ReportedContentService reportedContentService;
+
     /**
      * POST  /reportedContents -> Create a new reportedContent.
      */
@@ -45,7 +49,7 @@ public class ReportedContentResource {
         if (reportedContent.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("reportedContent", "idexists", "A new reportedContent cannot already have an ID")).body(null);
         }
-        ReportedContent result = reportedContentRepository.save(reportedContent);
+        ReportedContent result = reportedContentService.save(reportedContent);
         return ResponseEntity.created(new URI("/api/reportedContents/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("reportedContent", result.getId().toString()))
             .body(result);
@@ -63,7 +67,7 @@ public class ReportedContentResource {
         if (reportedContent.getId() == null) {
             return createReportedContent(reportedContent);
         }
-        ReportedContent result = reportedContentRepository.save(reportedContent);
+        ReportedContent result = reportedContentService.save(reportedContent);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("reportedContent", reportedContent.getId().toString()))
             .body(result);
@@ -79,7 +83,7 @@ public class ReportedContentResource {
     public ResponseEntity<List<ReportedContent>> getAllReportedContents(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of ReportedContents");
-        Page<ReportedContent> page = reportedContentRepository.findAll(pageable); 
+        Page<ReportedContent> page = reportedContentRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/reportedContents");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

@@ -26,4 +26,7 @@ public interface QuestionRepository extends JpaRepository<Question,Long> {
     @Query("select question from Question question where question.category.id = ?1 and question.lesson.id = ?2 and question.questionStatus.id = " + Constants.QuestionStatus.ACTIVE)
     Page<Question> listByCategoryAndLesson(Long categoryId, Long lessonId, Pageable pageable);
 
+    @Query("select question from Question question where question.questionStatus.id = " + Constants.QuestionStatus.ACTIVE)
+    Page<Question> listAll(Pageable pageable);
+
 }
