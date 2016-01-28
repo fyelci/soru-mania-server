@@ -1,5 +1,6 @@
 package com.fyelci.sorumania.service;
 
+import com.fyelci.sorumania.domain.Question;
 import com.fyelci.sorumania.domain.QuestionRating;
 import com.fyelci.sorumania.repository.QuestionRatingRepository;
 import com.fyelci.sorumania.repository.QuestionRepository;
@@ -61,9 +62,13 @@ public class QuestionRatingService {
         long totalRate = ((Long) rateResult[0]).longValue();
         long rateCount = ((Long) rateResult[1]).longValue();
         double avg = SoruManiaUtil.round((double) totalRate / (double) rateCount, 1);
-        questionRating.getQuestion().setRateAvg(new BigDecimal(avg));
-        questionRating.getQuestion().setRateCount(new Long(rateCount).intValue());
-        questionRepository.save(questionRating.getQuestion());
+
+        //Save Question
+        Question questionToSave = questionRepository.findOne(questionRating.getQuestion().getId());
+        questionToSave.setRateAvg(new BigDecimal(avg));
+        questionToSave.setRateCount(new Long(rateCount).intValue());
+        questionRepository.save(questionToSave);
+
 
         QuestionRatingDTO result = questionRatingMapper.questionRatingToQuestionRatingDTO(questionRating);
         result.setRateAvg(new BigDecimal(avg));

@@ -199,4 +199,42 @@ public class UserResource {
         userService.deleteUserInformation(login);
         return ResponseEntity.ok().headers(HeaderUtil.createAlert( "An user is deleted with identifier "+login, login)).build();
     }
+
+    /**
+     * GET  /users/follower/{userId} -> get follower list.
+     */
+    @RequestMapping(value = "/users/follower/{userId}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional(readOnly = true)
+    public ResponseEntity<List<ManagedUserDTO>> listFollowerUsers(@PathVariable Long userId,
+                                                                  Pageable pageable)
+        throws URISyntaxException {
+        Page<User> page = userService.listFollowerUsers(userId, pageable);
+        List<ManagedUserDTO> managedUserDTOs = page.getContent().stream()
+            .map(user -> new ManagedUserDTO(user))
+            .collect(Collectors.toList());
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users/follower/" + userId);
+        return new ResponseEntity<>(managedUserDTOs, headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /users/following/{userId} -> get follower list.
+     */
+    @RequestMapping(value = "/users/following/{userId}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional(readOnly = true)
+    public ResponseEntity<List<ManagedUserDTO>> listFollowingUsers(@PathVariable Long userId,
+                                                                  Pageable pageable)
+        throws URISyntaxException {
+        Page<User> page = userService.listFollowingUsers(userId, pageable);
+        List<ManagedUserDTO> managedUserDTOs = page.getContent().stream()
+            .map(user -> new ManagedUserDTO(user))
+            .collect(Collectors.toList());
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users/following/" + userId);
+        return new ResponseEntity<>(managedUserDTOs, headers, HttpStatus.OK);
+    }
 }

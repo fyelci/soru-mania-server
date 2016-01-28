@@ -32,6 +32,8 @@ To optimize the SoruMania client for production, run:
 
     mvn -Pprod clean package
 
+If you want to skip tests add `-Dmaven.test.skip=true` to maven command
+
 This will concatenate and minify CSS and JavaScript files. It will also modify `index.html` so it references
 these new files.
 

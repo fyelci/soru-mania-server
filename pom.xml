@@ -722,6 +722,7 @@
                         </executions>
                         <configuration>
                             <yeomanProjectDirectory>${project.basedir}</yeomanProjectDirectory>
+                            <skipTests>true</skipTests>
                         </configuration>
                     </plugin>
                     <plugin>

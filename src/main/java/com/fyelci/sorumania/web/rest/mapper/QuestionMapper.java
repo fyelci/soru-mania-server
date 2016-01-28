@@ -24,6 +24,7 @@ public interface QuestionMapper {
     @Mapping(target = "readableCreateDate", ignore = true)
     @Mapping(target = "readableModifyDate", ignore = true)
     @Mapping(target = "user", ignore = true)
+    @Mapping(target = "userRate", ignore = true)
     QuestionDTO questionToQuestionDTO(Question question);
 
     @Mapping(source = "categoryId", target = "category")

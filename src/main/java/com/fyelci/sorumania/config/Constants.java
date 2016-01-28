@@ -28,6 +28,12 @@ public final class Constants {
         public static final long COMMENT   = 403L;
     }
 
+    public class ContentPreferences {
+        public static final long HIDE  = 800L;
+        public static final long SHOW  = 801L;
+        public static final long WATCH = 802L;
+    }
+
     public class QuestionStatus {
         public static final long ACTIVE     = 200L;
         public static final long DELETED    = 201L;
@@ -47,6 +53,14 @@ public final class Constants {
     public class ReportedContentLimits {
         public static final long QUESTION  = 2L;
         public static final long COMMENT   = 2L;
+    }
+
+    public class UserRelationTypes {
+        public static final long PENDING  = 300L;
+        public static final long APPROVED = 301L;
+        public static final long REJECTED = 302L;
+        public static final long BLOCKED  = 303L;
+        public static final long DELETED  = 304L;
     }
 
 

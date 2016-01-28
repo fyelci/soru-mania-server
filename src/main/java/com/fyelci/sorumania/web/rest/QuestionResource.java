@@ -138,4 +138,61 @@ public class QuestionResource {
         questionRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("question", id.toString())).build();
     }
+
+
+    /**
+     * GET  /questions/asked/{userId} -> get user asked questions.
+     */
+    @RequestMapping(value = "/questions/asked/{userId}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional(readOnly = true)
+    public ResponseEntity<List<QuestionDTO>> listUserAskedQuestions(@PathVariable Long userId,
+                                                                    Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Questions");
+        Page<Question> page = questionService.listUserAskedQuestions(userId, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/questions/asked/" + userId.toString());
+        return new ResponseEntity<>(page.getContent().stream()
+            .map(questionMapper::questionToQuestionDTO)
+            .collect(Collectors.toCollection(LinkedList::new)), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /questions/answered/{userId} -> get user asked questions.
+     */
+    @RequestMapping(value = "/questions/answered/{userId}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional(readOnly = true)
+    public ResponseEntity<List<QuestionDTO>> listUserAnsweredQuestions(@PathVariable Long userId,
+                                                                    Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Questions");
+        Page<Question> page = questionService.listUserAnsweredQuestions(userId, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/questions/answered/" + userId.toString());
+        return new ResponseEntity<>(page.getContent().stream()
+            .map(questionMapper::questionToQuestionDTO)
+            .collect(Collectors.toCollection(LinkedList::new)), headers, HttpStatus.OK);
+    }
+    /**
+     * GET  /questions/answered/{userId} -> get user asked questions.
+     */
+    @RequestMapping(value = "/questions/watched/{userId}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional(readOnly = true)
+    public ResponseEntity<List<QuestionDTO>> listUserWatchingQuestions(@PathVariable Long userId,
+                                                                    Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Questions");
+        Page<Question> page = questionService.listUserWatchingQuestions(userId, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/questions/watched/" + userId.toString());
+        return new ResponseEntity<>(page.getContent().stream()
+            .map(questionMapper::questionToQuestionDTO)
+            .collect(Collectors.toCollection(LinkedList::new)), headers, HttpStatus.OK);
+    }
 }

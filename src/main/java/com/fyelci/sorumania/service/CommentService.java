@@ -109,7 +109,7 @@ public class CommentService {
     @Transactional(readOnly = true)
     public List<CommentDTO> findQuestionComments(Question q) {
         log.debug("Getting Question Comments");
-        List<Comment> result = commentRepository.findByQuestionOrderByCreateDateDesc(q);
+        List<Comment> result = commentRepository.listQuestionComments(q.getId());
         return result.stream()
             .map(commentMapper::commentToCommentDTO)
             .collect(Collectors.toCollection(LinkedList::new));

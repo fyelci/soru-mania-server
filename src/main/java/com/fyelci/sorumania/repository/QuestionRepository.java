@@ -29,4 +29,20 @@ public interface QuestionRepository extends JpaRepository<Question,Long> {
     @Query("select question from Question question where question.questionStatus.id = " + Constants.QuestionStatus.ACTIVE)
     Page<Question> listAll(Pageable pageable);
 
+
+    @Query("select question from Question question where question.user.id = ?1 and question.questionStatus.id = " + Constants.QuestionStatus.ACTIVE + " order by question.createDate desc")
+    Page<Question> listUserAskedQuestions(Long userId, Pageable pageable);
+
+    @Query("select distinct question from Question question, Comment comment where comment.user.id = ?1 and question.id = comment.question.id and question.questionStatus.id = " + Constants.QuestionStatus.ACTIVE + " order by question.createDate desc")
+    Page<Question> listUserAnsweredQuestions(Long userId, Pageable pageable);
+
+    @Query("select distinct question " +
+           " from Question question, UserContentPreference ucp " +
+           " where ucp.user.id = ?1 and ucp.contentType.id = " + Constants.ContentTypes.QUESTION +
+           " and ucp.contentPreference.id = "+ Constants.ContentPreferences.WATCH +
+           " and question.id = ucp.contentId " +
+           " and question.questionStatus.id = " + Constants.QuestionStatus.ACTIVE +
+           " order by question.createDate desc")
+    Page<Question> listUserWatchingQuestions(Long userId, Pageable pageable);
+
 }

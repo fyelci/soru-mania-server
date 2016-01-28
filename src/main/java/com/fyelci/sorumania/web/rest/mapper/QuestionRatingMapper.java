@@ -14,6 +14,8 @@ public interface QuestionRatingMapper {
     @Mapping(source = "question.id", target = "questionId")
     @Mapping(source = "user.id", target = "userId")
     @Mapping(source = "user.login", target = "userLogin")
+    @Mapping(target = "rateCount", ignore = true)
+    @Mapping(target = "rateAvg", ignore = true)
     QuestionRatingDTO questionRatingToQuestionRatingDTO(QuestionRating questionRating);
 
     @Mapping(source = "questionId", target = "question")

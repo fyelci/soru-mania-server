@@ -35,7 +35,7 @@ public class QuestionRating implements Serializable {
     @Column(name = "last_modified_date")
     private ZonedDateTime lastModifiedDate;
 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.DETACH)
     @JoinColumn(name = "question_id")
     private Question question;
 

@@ -18,6 +18,9 @@ public interface CommentRepository extends JpaRepository<Comment,Long> {
 
     List<Comment> findByQuestionOrderByCreateDateDesc(Question q);
 
+    @Query("select comment from Comment comment where comment.question.id = ?1 and comment.commentStatus.id = " + Constants.CommentStatus.ACTIVE + " order by comment.createDate desc")
+    List<Comment> listQuestionComments(Long questionId);
+
     @Query("select count(comment.id) from Comment comment where comment.question.id = ?1 and comment.parentId is null and comment.commentStatus.id = " + Constants.CommentStatus.ACTIVE)
     Long countQuestionComment(Long questionId);
 

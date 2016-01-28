@@ -138,4 +138,22 @@ public class QuestionService {
 
         return page;
     }
+
+    @Transactional(readOnly = true)
+    public Page<Question> listUserAskedQuestions(Long userId, Pageable pageable) {
+        Page<Question> page = questionRepository.listUserAskedQuestions(userId, pageable);
+        return page;
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Question> listUserAnsweredQuestions(Long userId, Pageable pageable) {
+        Page<Question> page = questionRepository.listUserAnsweredQuestions(userId, pageable);
+        return page;
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Question> listUserWatchingQuestions(Long userId, Pageable pageable) {
+        Page<Question> page = questionRepository.listUserWatchingQuestions(userId, pageable);
+        return page;
+    }
 }
