@@ -237,4 +237,15 @@ public class UserResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users/following/" + userId);
         return new ResponseEntity<>(managedUserDTOs, headers, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/users/leaderboard",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional(readOnly = true)
+    public List<UserDTO> listLeaderboard(@RequestParam Integer listType, @RequestParam Integer pageNum, @RequestParam Integer pageSize)
+        throws URISyntaxException {
+        List<UserDTO> users = userService.listLeaderBoard(listType, pageNum, pageSize);
+        return users;
+    }
 }

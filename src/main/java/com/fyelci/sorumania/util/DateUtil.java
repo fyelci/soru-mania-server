@@ -2,6 +2,8 @@ package com.fyelci.sorumania.util;
 
 import java.time.Instant;
 import java.time.ZonedDateTime;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by fatih on 20/12/15.
@@ -15,4 +17,15 @@ public class DateUtil {
         return date;
     }
 
+
+    public static Date addDays(Date date, int dayCount) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(5, dayCount);
+        return cal.getTime();
+    }
+
+    public static Date subtractDays(Date date, int dayCount) {
+        return addDays(date, -dayCount);
+    }
 }

@@ -63,5 +63,10 @@ public final class Constants {
         public static final long DELETED  = 304L;
     }
 
+    public class LeaderboardListTypes {
+        public static final int DAILY  = 1;
+        public static final int WEEKLY = 2;
+        public static final int MONTHLY= 3;
+    }
 
 }

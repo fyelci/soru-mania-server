@@ -78,7 +78,7 @@ public class CommentService {
         questionRepository.save(question);
 
         //Kullaniciya yaptigi islem icin paun ver
-        scoreService.addScoreToUser(comment.getUser(), comment.getId(), Constants.ContentTypes.COMMENT, Constants.ScoreTypes.COMMENT);
+        scoreService.addScoreToUser(comment.getUser().getId(), comment.getId(), Constants.ContentTypes.COMMENT, Constants.ScoreTypes.COMMENT);
 
         CommentDTO result = commentMapper.commentToCommentDTO(comment);
         return result;

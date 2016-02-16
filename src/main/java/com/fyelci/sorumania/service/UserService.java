@@ -6,6 +6,7 @@ import com.fyelci.sorumania.domain.User;
 import com.fyelci.sorumania.repository.AuthorityRepository;
 import com.fyelci.sorumania.repository.LovRepository;
 import com.fyelci.sorumania.repository.UserRepository;
+import com.fyelci.sorumania.repository.dao.UserDao;
 import com.fyelci.sorumania.security.SecurityUtils;
 import com.fyelci.sorumania.service.util.RandomUtil;
 import com.fyelci.sorumania.web.rest.dto.ManagedUserDTO;
@@ -44,6 +45,9 @@ public class UserService {
 
     @Inject
     private AuthorityRepository authorityRepository;
+
+    @Inject
+    private UserDao userDao;
 
     @Inject
     private LovRepository lovRepository;
@@ -236,5 +240,11 @@ public class UserService {
     public Page<User> listFollowingUsers(Long userId, Pageable pageable) {
         Page<User> page = userRepository.listFollowingUsers(userId, pageable);
         return page;
+    }
+
+    @Transactional(readOnly = true)
+    public List<UserDTO> listLeaderBoard(Integer listType, Integer pageNum, Integer pageSize) {
+        List<UserDTO> list = userDao.getLeaderBoard(listType, pageNum, pageSize);
+        return list;
     }
 }

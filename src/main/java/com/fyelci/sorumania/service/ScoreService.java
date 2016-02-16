@@ -26,8 +26,9 @@ public class ScoreService {
     @Inject
     private LovRepository lovRepository;
 
-    public void addScoreToUser(User user, Long contentId, Long transactionTypeId, Long scoreTypeId) {
+    public void addScoreToUser(Long userId, Long contentId, Long transactionTypeId, Long scoreTypeId) {
         Lov scoreType = lovRepository.findOne(scoreTypeId);
+        User user = userRepository.findOne(userId);
 
         //Yaptigi islemi skor gecmisine ekle.
         ScoreHistory scoreHist = new ScoreHistory();

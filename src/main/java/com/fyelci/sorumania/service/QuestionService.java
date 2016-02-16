@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.inject.Inject;
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -70,6 +71,8 @@ public class QuestionService {
             questionDTO.setCreateDate(ZonedDateTime.now());
             questionDTO.setLastModifiedDate(ZonedDateTime.now());
             questionDTO.setCommentCount(0);
+            questionDTO.setRateCount(0);
+            questionDTO.setRateAvg(new BigDecimal(0));
             questionDTO.setQuestionStatusId(Constants.QuestionStatus.ACTIVE);
         } else {
             //Update
@@ -88,7 +91,7 @@ public class QuestionService {
 
         //Kullanciciya soru sordugu icin puan ver.
         if (isInsert) {
-            scoreService.addScoreToUser(question.getUser(), question.getId(), Constants.ContentTypes.QUESTION, Constants.ScoreTypes.ASK_QUESTION);
+            scoreService.addScoreToUser(question.getUser().getId(), question.getId(), Constants.ContentTypes.QUESTION, Constants.ScoreTypes.ASK_QUESTION);
         }
 
         return questionMapper.questionToQuestionDTO(question);
